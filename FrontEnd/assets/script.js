@@ -33,7 +33,7 @@ genererProjects(works);
 /**
  * Bouton qui gère l'affichage de tous les projets
  */
-const btnAll = document.getElementById("allProjects")
+const btnAll = document.getElementById("allProjects");
 
 btnAll.addEventListener("click", () => {
     gallery.innerHTML = "";
@@ -61,7 +61,7 @@ const btnAppartments = document.getElementById("Appartments")
 btnAppartments.addEventListener("click", () => {
     const worksAppartments = works.filter((work) => {
         return work.categoryId === 2;
-    })
+    })    
     gallery.innerHTML = "";
     genererProjects(worksAppartments);
 })
