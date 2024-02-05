@@ -95,7 +95,12 @@ nav li {
 	font-size: 1.2em;
 }
 
-li:hover {
+li a {
+	text-decoration: none;
+	color: #0E2F28;
+}
+
+li:hover a:hover {
 	color: #B1663C;
 }
 #introduction {
@@ -248,7 +253,7 @@ input[type="submit"]{
 	border-radius: 60px ;
 }
 
-input:hover{
+input[type="submit"]:hover{
 	background-color: #0E2F28;
 }
 
