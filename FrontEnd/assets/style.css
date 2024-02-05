@@ -126,7 +126,7 @@ li:hover {
 	margin-bottom: 1em;
 }
 
-#portfolio .filtres {
+#portfolio #filters {
 	width: 560px;
 	margin: auto;
 	margin-bottom: 3em;
