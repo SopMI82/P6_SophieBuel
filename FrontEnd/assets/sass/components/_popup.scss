@@ -8,10 +8,7 @@
     justify-content: center;
     display: flex;
     align-content: center;
-    display: flex;
-    input[type="submit"] {
-        width: 60%;
-    }
+    display: flex; /* 'none' => 'flex' onclick 'edit' */
 }
 
 .popupNav {
@@ -47,14 +44,22 @@
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
     align-self: center;
+
+    input[type="submit"] {
+        width: 60%;
+    }
 }
 
 .page-one {
-    display: none;
+    width: 420px;
+    display: flex;
+    flex-direction: column;
 }
 
 .page-two {
-    display: block;
+    width: 420px;
+    display: none;
+    flex-direction: column;
 }
 
 .submissionPhoto {

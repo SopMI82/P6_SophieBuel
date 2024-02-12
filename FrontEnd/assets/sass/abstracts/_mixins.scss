@@ -2,3 +2,23 @@
     color: $secund-color;
     cursor: pointer;
 }
+
+@mixin btnRounded {
+    height: 40px;
+    width: auto;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    padding: 0 30px;
+    cursor: pointer;
+}
+
+@mixin mainColorBtn {
+    color: white;
+    background-color: #1D6154;
+    text-align: center;
+    border: none;
+    margin: 2em auto;
+}

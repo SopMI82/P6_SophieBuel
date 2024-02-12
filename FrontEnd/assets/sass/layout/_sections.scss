@@ -15,31 +15,35 @@
     article {
         flex: 1
     }
-
-    h2 {
-        margin-bottom: 1em;
-    }
-
-    p {
-        margin-bottom: 0.5em;
-    }
 }
 
 #portfolio {
+    width: 100%;
+    box-sizing: border-box;
+
     h2 {
         text-align: center;
-        margin-bottom: 1em;
     }
 
     #filters {
-        width: 560px;
-        margin: auto;
-        margin-bottom: 3em;
+        width: 100%;
+        gap: 15px;
+        margin-bottom: 2em;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
     }
 
+}
 
+#contact {
+    width: 50%;
+    margin: auto;
 
+    * {
+        text-align: center;
+    }
 
+    label {
+        text-align: left;
+    }
 }

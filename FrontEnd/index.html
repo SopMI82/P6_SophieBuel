@@ -16,6 +16,11 @@
 </head>
 
 <body>
+	<div class="adminMode">
+		<i class="fa-regular fa-pen-to-square"></i>
+		<p>Mode édition</p>
+	</div>
+	<div class="mainContainer">
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
@@ -46,9 +51,9 @@
 		</section>
 		<section id="portfolio">
 			<h2>Mes Projets</h2>
-			<div class="edit"><i class="fa-regular fa-pen-to-square"></i>modifier</div>
+			<button class="edit"><i class="fa-regular fa-pen-to-square"></i>modifier</button>
 			<div id="filters">
-				<button id="0">Tous</button>
+				<button id="0" autofocus>Tous</button>
 			</div>
 			<div class="gallery">
 			</div>
@@ -88,7 +93,6 @@
 				</button>
 			</div>
 			<div class="page-one">
-				<i class="fa-solid fa-xmark"></i>
 				<h3>Galerie photo</h3>
 				<div class="gallery"></div> <!--Attention utiliser grid-->
 				<div class="lineDecor"></div>
@@ -112,6 +116,7 @@
 				</form>
 			</div>
 		</div>
+	</div>
 	</div>
 </body>
 
