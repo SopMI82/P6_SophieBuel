@@ -100,9 +100,19 @@ li a {
 	color: #0E2F28;
 }
 
-li:hover a:hover {
+li:hover, a:hover {
 	color: #B1663C;
+	cursor: pointer;
 }
+
+.logOut {
+	display: none;
+}
+
+.logIn {
+	display: block;
+}
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -129,6 +139,13 @@ li:hover a:hover {
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
+}
+
+.edit {
+	display: flex;
+	gap: 10px;
+	line-height: 1.2em;
+	font-size: 16px;
 }
 
 #portfolio #filters {

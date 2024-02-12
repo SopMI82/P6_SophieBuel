@@ -1,3 +1,5 @@
+
+
 // Récupération des projets depuis l'api
 const responseCategories = await fetch('http://localhost:5678/api/categories')
 const categories = await responseCategories.json();
