@@ -1,4 +1,10 @@
 body {
+    font-family: $txt-main;
+    font-size: 0.9rem;
+    background-color: $bg-color;
+}
+
+.mainContainer {
     max-width: 1140px;
     margin: auto;
     font-family: $txt-main;

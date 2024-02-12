@@ -1,10 +1,28 @@
 .edit {
-    display: flex;
+    display: flex; /*'none' when unknown visitor / 'flex' when connected*/
     gap: 10px;
     line-height: 1.2em;
     font-size: 16px;
     position: relative;
     top: -52px;
     left: 65%;
-    display: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.adminMode {
+    display: flex; /*'none' when unknown visitor / 'flex' when connected*/
+    justify-content: center;
+    width: 100vw;
+    height: 60px;
+    background-color: $black;
+    color: $white;
+    gap: 10px;
+    align-items: center;
+    font-size: 1rem;
+    p{
+        margin: 0;
+    }
+
 }
