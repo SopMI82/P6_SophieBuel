@@ -146,6 +146,10 @@ li:hover, a:hover {
 	gap: 10px;
 	line-height: 1.2em;
 	font-size: 16px;
+	position: relative;
+	top: -52px;
+	left: 65%;
+	display: none;
 }
 
 #portfolio #filters {
