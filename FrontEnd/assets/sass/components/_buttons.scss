@@ -1,0 +1,49 @@
+button {
+    font: 700 1rem Syne;
+    color: #1D6154;
+    background-color: white;
+    height: 40px;
+    width: auto;
+    padding: 0 15px;
+    border: 1px solid #1D6154;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+
+    &:focus {
+        color: white;
+        background-color: #1D6154;
+        outline: #1D6154;
+    }
+}
+
+input {
+    height: 50px;
+    font-size: 1.2em;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+input[type="submit"] {
+    font-family: 'Syne';
+    font-weight: 700;
+    color: white;
+    background-color: #1D6154;
+    margin: 2em auto;
+    width: 180px;
+    height: 36px;
+    text-align: center;
+    border-radius: 60px;
+    border: none;
+
+    &:hover {
+        background-color: #0E2F28;
+    }
+}
+
+.lineDecor {
+    border: 1px solid #B3B3B3;
+    margin-top: 25px;
+}

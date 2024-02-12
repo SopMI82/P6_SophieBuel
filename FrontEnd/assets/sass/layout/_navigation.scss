@@ -1,0 +1,30 @@
+ul {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+}
+
+li {
+    padding: 0 10px;
+
+    a {
+        text-decoration: none;
+        color: #0e2f28;
+
+        &:hover {
+            @include navLink-hover;
+        }
+    }
+
+    &:hover {
+        @include navLink-hover;
+    }
+}
+
+.logOut {
+    display: none;
+}
+
+.logIn {
+    display: block;
+}
