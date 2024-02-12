@@ -1,0 +1,74 @@
+.popup {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: $bg-popup;
+    justify-content: center;
+    display: flex;
+    align-content: center;
+    display: flex;
+    input[type="submit"] {
+        width: 60%;
+    }
+}
+
+.popupNav {
+    width: 580px;
+    box-sizing: border-box;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+
+
+    .btnPopup {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 25px;
+        line-height: 25px;
+    }
+}
+
+.popupContent {
+    width: 630px;
+    height: 690px;
+    box-sizing: border-box;
+    padding: 25px;
+    gap: 25px;
+    align-items: center;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    align-self: center;
+}
+
+.page-one {
+    display: none;
+}
+
+.page-two {
+    display: block;
+}
+
+.submissionPhoto {
+    display: flex;
+    flex-direction: column;
+
+    .selectPhoto {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+
+        .fa-image {
+            font-size: 75px;
+            line-height: 75px;
+        }
+    }
+}
