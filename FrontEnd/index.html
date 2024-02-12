@@ -75,6 +75,37 @@
 			</ul>
 		</nav>
 	</footer>
+
+	<!--PopUp-->
+	<div class="popup">
+		<div class="edit1">
+			<i class="fa-solid fa-xmark"></i>
+			<h3>Galerie photo</h3>
+			<div class="gallery"></div> <!--Attention utiliser grid-->
+			<div class="lineDecor"></div>
+			<input type="submit" value="Ajouter une photo">
+		</div>
+		<div class="edit2">
+			<div popupNav>
+				<i class="fa-solid fa-arrow-left"></i>
+				<i class="fa-solid fa-xmark"></i>
+			</div>
+			<h3>Ajout photo</h3>
+			<form action="" class="submissionPhoto">
+				<div class="selectPhoto">
+					<i class="fa-regular fa-image"><input type="image" src="" alt=""></i>
+					<input type="submit" value="+ Ajouter photo">
+					<p>jpg, png : 4mo max</p>
+				</div>
+				<label for="title">Titre</label>
+				<input type="text" name="title" id="projectName">
+				<label for="category">Catégorie</label>
+				<input type="text" name="category" id="projectCategory"> <!--Attention, choisir la cat pour les listes déroulantes-->
+				<div class="lineDecor"></div>
+				<input type="submit" value="Valider">
+			</form>
+		</div>
+	</div>
 </body>
 
 </html>
