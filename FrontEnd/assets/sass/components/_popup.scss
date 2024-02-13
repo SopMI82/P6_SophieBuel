@@ -52,13 +52,13 @@
 
 .page-one {
     width: 420px;
-    display: flex;
+    display: flex; /* 'none' => 'flex' onclick 'edit' */
     flex-direction: column;
 }
 
 .page-two {
     width: 420px;
-    display: none;
+    display: none; /* 'none' => 'flex' onclick 'suivant' */
     flex-direction: column;
 }
 
