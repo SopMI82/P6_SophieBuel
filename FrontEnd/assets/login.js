@@ -22,8 +22,28 @@ btnConnect.addEventListener("click", (event) => {
 
     fetch('http://localhost:5678/api/users/login', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(login)
     })
-
+    .then(response => {
+        if (response.ok) {
+            return response.json()
+        
+        } else {
+            throw new Error('pas de reponse du serveur')
+        }
+    })
+    .then (data => {
+        console.log(data)
+        if (data.token) {
+            const token = data.token
+            localStorage.setItem('token', token)
+            console.log(token);
+        }
+    })
+    .catch(error => {
+        const errorBox = document.querySelector('.errorBox')
+        console.log(errorBox);
+        errorBox.insertAdjacentHTML('beforeend', "<p>Email ou mot de passe incorrect</p>")
+    });
 })

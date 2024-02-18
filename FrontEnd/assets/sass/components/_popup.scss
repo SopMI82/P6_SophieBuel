@@ -8,7 +8,7 @@
     justify-content: center;
     display: flex;
     align-content: center;
-    display: flex; /* 'none' => 'flex' onclick 'edit' */
+    display: none; /* 'none' => 'flex' onclick 'edit' */
 }
 
 .popupNav {
@@ -35,7 +35,7 @@
     padding: 25px;
     gap: 25px;
     align-items: center;
-    background-color: white;
+    background-color: $white;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
