@@ -7,8 +7,10 @@ const categories = await responseCategories.json();
 const responseWorks = await fetch('http://localhost:5678/api/works')
 const works = await responseWorks.json();
 
-// Récupération de l'élément du DOM qui accueillera les projets
+// Récupération des éléments du DOM qui accueilleront les projets
 const gallery = document.querySelector('.gallery');
+const miniGallery = document.querySelector(".miniGallery");
+console.log(miniGallery);
 
 /**
  * Fonction qui importe les projets de manière dynamique
@@ -17,6 +19,7 @@ const gallery = document.querySelector('.gallery');
 function genererProjects(works) {
     works.forEach(work => {
         const project = document.createElement("figure");
+        
         // Création des projets
         const photoProjet = document.createElement('img');
         photoProjet.src = work.imageUrl;
@@ -58,3 +61,26 @@ btnAll.addEventListener("click", () => {
     gallery.innerHTML = "";
     genererProjects(works);
 })
+
+/**
+ * Générer l'affichage de la gallerie dans la popup
+ */
+function genererApercu(works) {
+    works.forEach(work => {
+        miniGallery.insertAdjacentHTML('beforeend',`
+            <figure>
+                <img src="${work.imageUrl}">
+                <i class="fa-regular fa-trash-can"></i>
+            </figure>
+        `)
+    });
+}
+
+genererApercu(works);
+
+
+/**
+ * fonction à créer pour afficher/masquer les élémants admin
+ */
+
+/**fonction logout */

@@ -8,7 +8,7 @@
     justify-content: center;
     display: flex;
     align-content: center;
-    display: none; /* 'none' => 'flex' onclick 'edit' */
+    display: flex; /* 'none' => 'flex' onclick 'edit' */
 }
 
 .popupNav {
@@ -54,6 +54,42 @@
     width: 420px;
     display: flex; /* 'none' => 'flex' onclick 'edit' */
     flex-direction: column;
+}
+
+.miniGallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    row-gap: 24px;
+    column-gap: 8px;
+    figure {
+        width: 100%;
+        display: flex;
+        position: relative;
+        animation: name duration timing-function delay iteration-count direction fill-mode;
+        img {
+            display: flex;
+            width: 100%;
+        }
+        i {
+            display: flex;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+            padding: 4px;
+            border-radius: 2px;
+            font-size: 0.6rem;
+            background-color: $black;
+            color: $white;
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            -ms-border-radius: 2px;
+            -o-border-radius: 2px;
+}
+    }
+    &:hover {
+        animation: name duration timing-function delay iteration-count direction fill-mode;
+    }
 }
 
 .page-two {

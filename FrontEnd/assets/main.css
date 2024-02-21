@@ -154,7 +154,7 @@ h2 {
   font-family: "Syne";
   font-weight: 700;
   font-size: 1.8rem;
-  color: #1D6154;
+  color: white;
   margin-bottom: 1em;
 }
 
@@ -222,13 +222,50 @@ p {
 
 .page-one {
   width: 420px;
-  display: flex;
+  display: flex; /* 'none' => 'flex' onclick 'edit' */
   flex-direction: column;
+}
+
+.miniGallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  row-gap: 24px;
+  -moz-column-gap: 8px;
+       column-gap: 8px;
+}
+.miniGallery figure {
+  width: 100%;
+  display: flex;
+  position: relative;
+  animation: name duration timing-function delay iteration-count direction fill-mode;
+}
+.miniGallery figure img {
+  display: flex;
+  width: 100%;
+}
+.miniGallery figure i {
+  display: flex;
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  padding: 4px;
+  border-radius: 2px;
+  font-size: 0.6rem;
+  background-color: black;
+  color: white;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+}
+.miniGallery:hover {
+  animation: name duration timing-function delay iteration-count direction fill-mode;
 }
 
 .page-two {
   width: 420px;
-  display: none;
+  display: none; /* 'none' => 'flex' onclick 'suivant' */
   flex-direction: column;
 }
 
@@ -294,7 +331,7 @@ input[type=submit] {
   font-weight: 700;
 }
 input[type=submit]:hover {
-  background-color: #0E2F28;
+  background-color: #0e2f28;
 }
 
 .lineDecor {
@@ -464,6 +501,11 @@ li:hover {
   text-decoration: underline;
   border: none;
   background-color: transparent;
+}
+
+.errorBox {
+  font-size: 1.2rem;
+  color: red;
 }
 
 .edit {
