@@ -16,107 +16,111 @@
 </head>
 
 <body>
-	<div class="adminMode">
+	<div class="adminMode masked">
 		<i class="fa-regular fa-pen-to-square"></i>
 		<p>Mode édition</p>
 	</div>
 	<div class="mainContainer">
-	<header>
-		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-		<nav>
-			<ul>
-				<li>projets</li>
-				<li>contact</li>
-				<li class="logIn"><a href="./assets/login.html">login</a></li>
-				<li class="logOut">logout</li>
-				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-			</ul>
-		</nav>
-	</header>
-	<main>
-		<section id="introduction">
-			<figure>
-				<img src="./assets/images/sophie-bluel.png" alt="">
-			</figure>
-			<article>
-				<h2>Designer d'espace</h2>
-				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison
-					finale du chantier.</p>
-				<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les
-					couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du
-					chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
-				<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG,
-					décorateur(trice)</p>
-			</article>
-		</section>
-		<section id="portfolio">
-			<h2>Mes Projets</h2>
-			<button class="edit"><i class="fa-regular fa-pen-to-square"></i>modifier</button>
-			<div id="filters">
-				<button id="0" autofocus>Tous</button>
-			</div>
-			<div class="gallery">
-			</div>
-		</section>
-		<section id="contact">
-			<h2>Contact</h2>
-			<p>Vous avez un projet ? Discutons-en !</p>
-			<form action="#" method="post">
-				<label for="name">Nom</label>
-				<input type="text" name="name" id="name">
-				<label for="email">Email</label>
-				<input type="email" name="email" id="email">
-				<label for="message">Message</label>
-				<textarea name="message" id="message" cols="30" rows="10"></textarea>
-				<input type="submit" value="Envoyer">
-			</form>
-		</section>
-	</main>
-
-	<footer>
-		<nav>
-			<ul>
-				<li>Mentions Légales</li>
-			</ul>
-		</nav>
-	</footer>
-
-	<!--PopUp-->
-	<div class="popup">
-		<div class="popupContent">
-			<div class="popupNav">
-				<button class=" btnPopup previousScreen">
-					<i class="fa-solid fa-arrow-left"></i>
-				</button>
-				<button class="btnPopup closePopup">
-					<i class="fa-solid fa-xmark"></i>
-				</button>
-			</div>
-			<div class="page-one">
-				<h3>Galerie photo</h3>
-				<div class="miniGallery"></div> <!--Attention utiliser grid-->
-				<div class="lineDecor"></div>
-				<input type="submit" value="Ajouter une photo">
-			</div>
-			<div class="page-two">
-				<h3>Ajout photo</h3>
-				<form action="" class="submissionPhoto">
-					<div class="selectPhoto">
-						<i class="fa-regular fa-image"><input type="image" src="" alt=""></i>
-						<input type="submit" value="+ Ajouter photo">
-						<p>jpg, png : 4mo max</p>
-					</div>
-					<label for="title">Titre</label>
-					<input type="text" name="title" id="projectName">
-					<label for="category">Catégorie</label>
-					<input type="text" name="category" id="projectCategory">
-					<!--Attention, choisir la cat pour les listes déroulantes-->
-					<div class="lineDecor"></div>
-					<input type="submit" value="Valider">
+		<header>
+			<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+			<nav>
+				<ul>
+					<li>projets</li>
+					<li>contact</li>
+					<li class="logBtn logIn"><a href="./assets/login.html">login</a></li>
+					<li class="logBtn logOut masked">logout</li>
+					<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+				</ul>
+			</nav>
+		</header>
+		<main>
+			<section id="introduction">
+				<figure>
+					<img src="./assets/images/sophie-bluel.png" alt="">
+				</figure>
+				<article>
+					<h2>Designer d'espace</h2>
+					<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la
+						livraison
+						finale du chantier.</p>
+					<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les
+						couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du
+						chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
+					<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG,
+						décorateur(trice)</p>
+				</article>
+			</section>
+			<section id="portfolio">
+				<h2>Mes Projets</h2>
+				<button class="edit masked"><i class="fa-regular fa-pen-to-square"></i>modifier</button>
+				<div id="filters">
+					<button id="0" autofocus>Tous</button>
+				</div>
+				<div class="gallery">
+				</div>
+			</section>
+			<section id="contact">
+				<h2>Contact</h2>
+				<p>Vous avez un projet ? Discutons-en !</p>
+				<form action="#" method="post">
+					<label for="name">Nom</label>
+					<input type="text" name="name" id="name">
+					<label for="email">Email</label>
+					<input type="email" name="email" id="email">
+					<label for="message">Message</label>
+					<textarea name="message" id="message" cols="30" rows="10"></textarea>
+					<input type="submit" value="Envoyer">
 				</form>
+			</section>
+		</main>
+
+		<footer>
+			<nav>
+				<ul>
+					<li>Mentions Légales</li>
+				</ul>
+			</nav>
+		</footer>
+
+		<!--PopUp-->
+		<div class="popup">
+			<div class="popupContent">
+				<div class="popupNav">
+					<button class=" btnPopup previousScreen">
+						<i class="fa-solid fa-arrow-left"></i>
+					</button>
+					<button class="btnPopup closePopup">
+						<i class="fa-solid fa-xmark"></i>
+					</button>
+				</div>
+				<div class="page-one">
+					<h3>Galerie photo</h3>
+					<div class="miniGallery"></div>
+					<div class="lineDecor"></div>
+					<input type="submit" class="newProject" value="Ajouter une photo">
+				</div>
+				<div class="page-two">
+					<h3>Ajout photo</h3>
+					<form action="" class="submissionPhoto">
+						<div class="selectPhoto">
+							<div class="getImg">
+								<label for="explore"><i class="fa-regular fa-image"></i></label>
+								<input id="explore"  type="file" accept=".png,.jpeg,jpeg">
+							</div>
+							<input id="addPhoto" type="submit" value="+ Ajouter photo">
+							<p>jpg, png : 4mo max</p>
+						</div>
+						<label for="title">Titre</label>
+						<input type="text" name="title" id="projectName">
+						<label for="category">Catégorie</label>
+						<input type="text" name="category" id="projectCategory">
+						<!--Attention, choisir la cat pour les listes déroulantes-->
+						<div class="lineDecor"></div>
+						<input class="addNewProject" type="submit" value="Valider">
+					</form>
+				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 </body>
 

@@ -10,7 +10,7 @@ btnConnect.addEventListener("click", (event) => {
     const login = {
         email: email,
         password: password
-    }
+    };
     fetch('http://localhost:5678/api/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -23,10 +23,12 @@ btnConnect.addEventListener("click", (event) => {
                 const token = data.token
                 localStorage.setItem('token', token)
                 console.log(localStorage);
-                errorBox.insertAdjacentHTML('beforeend', "<p>Identification réussie, token enregistré</p>")
+ //               window.location.href = "./index.html";
             }
         })
         .catch(error => {
             errorBox.insertAdjacentHTML('beforeend', "<p>Email ou mot de passe incorrect</p>")
         });
 })
+
+

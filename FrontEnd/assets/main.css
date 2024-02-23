@@ -181,7 +181,9 @@ p {
   justify-content: center;
   display: flex;
   align-content: center;
-  display: flex; /* 'none' => 'flex' onclick 'edit' */
+  display: flex;
+  /******************ligne a modifier
+  /* 'none' => 'flex' onclick 'edit' */
 }
 
 .popupNav {
@@ -197,6 +199,10 @@ p {
   cursor: pointer;
   font-size: 25px;
   line-height: 25px;
+}
+.popupNav .closePopup {
+  display: flex;
+  justify-items: flex-end;
 }
 
 .popupContent {
@@ -222,7 +228,9 @@ p {
 
 .page-one {
   width: 420px;
-  display: flex; /* 'none' => 'flex' onclick 'edit' */
+  display: none;
+  /***************a modifier
+  /* 'none' => 'flex' onclick 'edit' */
   flex-direction: column;
 }
 
@@ -243,6 +251,23 @@ p {
 .miniGallery figure img {
   display: flex;
   width: 100%;
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+}
+.miniGallery figure img:hover {
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
 }
 .miniGallery figure i {
   display: flex;
@@ -258,15 +283,40 @@ p {
   -moz-border-radius: 2px;
   -ms-border-radius: 2px;
   -o-border-radius: 2px;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
 }
-.miniGallery:hover {
-  animation: name duration timing-function delay iteration-count direction fill-mode;
+.miniGallery figure i:hover {
+  transition: all 0.3s ease-in-out;
+  background-color: white;
+  color: black;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
 }
 
 .page-two {
   width: 420px;
-  display: none; /* 'none' => 'flex' onclick 'suivant' */
+  display: flex;
+  /***************a modifier
+  /* 'none' => 'flex' onclick 'suivant' */
   flex-direction: column;
+}
+.page-two .selectPhoto * {
+  margin: 0;
+}
+.page-two .selectPhoto .getImg {
+  display: flex;
+  justify-content: center;
+}
+.page-two .selectPhoto .getImg #explore {
+  position: absolute;
+  opacity: 0;
+  z-index: 1;
 }
 
 .submissionPhoto {
@@ -439,12 +489,8 @@ li:hover {
   cursor: pointer;
 }
 
-.logOut {
-  display: none;
-}
-
-.logIn {
-  display: block;
+.logBtn {
+  display: flex;
 }
 
 #introduction {
@@ -552,4 +598,8 @@ body {
 
 section {
   margin: 50px 0;
+}
+
+.masked {
+  display: none;
 }/*# sourceMappingURL=main.css.map */
