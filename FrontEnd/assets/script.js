@@ -108,8 +108,16 @@ function genererApercu(works) {
     });
 }
 
+function eraseToken(token) {
+    const logOut = document.querySelector('.logOut')
+    console.log(logOut);
+    logOut.addEventListener("click", () => {
+        window.localStorage.removeItem("token")
+    })
+}
+eraseToken()
 
-//////////////////////////////////////                    ADMIN MODE
+//////////////////////////////////////                    Modal Window
 
 
 function createModal(event) {
@@ -120,8 +128,6 @@ function createModal(event) {
         </div>
         `)
 }
-
-
 
 function generatePage1(event) {
     const popupContent = document.querySelector('.popupContent')
@@ -140,7 +146,7 @@ function generatePage1(event) {
         </div>
         `)
     genererApercu(works);
-        }
+}
 
 function generatePage2(event) {
     const newProject = document.querySelector('.newProject')
@@ -184,18 +190,12 @@ function generatePage2(event) {
 function closeModal(event) {
     const closePopup = document.querySelector('.closePopup')
     const popup = document.querySelector('.popup')
-    console.log(closePopup);
-    closePopup.forEach(closePopup => {
-        closePopup.addEventListener("click", () => {
-            popup.remove()
-        })
+    closePopup.addEventListener("click", () => {
+        popup.remove()
     })
 }
 
-
-
 //afficher la modale au clic
-
 
 BtnModify.addEventListener("click", () => {
     createModal();
@@ -205,16 +205,6 @@ BtnModify.addEventListener("click", () => {
 })
 
 
-
-
-
-//////////////////////////////////////                    MODAL WINDOW
-
-//Page 1
-
-//   1/ RECUPERATION DES ELEMENTS DU DOM
-
-//element général de la popup créé au clic sur BtnModify
 
 
 
@@ -282,18 +272,6 @@ console.log(createProject);
 // construction du Json pour l'envoi du nouveau projet
 // à placer dans l'EventListener du bouton addNewProject
 
-
-
-
-
-/**
- * fonction logout 
-*/
-
-
-const logOut = document.querySelector('.logOut')
-console.log(logOut);
-// supprime le contenu du local storage
 
 /**
  * Fonction trash
