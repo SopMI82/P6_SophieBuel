@@ -1,0 +1,24 @@
+
+		<!--PopUp-->
+		<div class="popup">
+				<div class="page-two">
+					<h3>Ajout photo</h3>
+					<form action="" class="submissionPhoto">
+						<div class="selectPhoto">
+							<div class="getImg">
+								<label for="explore"><i class="fa-regular fa-image"></i></label>
+								<input id="explore"  type="file" accept=".png,.jpeg,jpeg">
+							</div>
+							<input id="addPhoto" type="submit" value="+ Ajouter photo">
+							<p>jpg, png : 4mo max</p>
+						</div>
+						<label for="title">Titre</label>
+						<input type="text" name="title" id="projectName">
+						<label for="category">Catégorie</label>
+						<input type="text" name="category" id="projectCategory">
+						<!--Attention, choisir la cat pour les listes déroulantes-->
+						<div class="lineDecor"></div>
+						<input class="addNewProject" type="submit" value="Valider">
+					</form>
+				</div>
+		</div>

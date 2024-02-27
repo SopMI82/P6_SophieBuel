@@ -9,8 +9,6 @@ const works = await responseWorks.json();
 
 // Récupération des éléments du DOM qui accueilleront les projets
 const gallery = document.querySelector('.gallery');
-const miniGallery = document.querySelector(".miniGallery");
-console.log(miniGallery);
 
 /**
  * Fonction qui importe les projets de manière dynamique
@@ -18,7 +16,7 @@ console.log(miniGallery);
  */
 function genererProjects(works) {
     works.forEach(work => {
-        gallery.insertAdjacentHTML('beforeend',`
+        gallery.insertAdjacentHTML('beforeend', `
             <figure>
                 <img src="${work.imageUrl}">
                 <figcaption>${work.title}</figcaption>
@@ -59,8 +57,10 @@ btnAll.addEventListener("click", () => {
  * Générer l'affichage de la gallerie dans la popup
  */
 function genererApercu(works) {
+    const miniGallery = document.querySelector(".miniGallery");
+
     works.forEach(work => {
-        miniGallery.insertAdjacentHTML('beforeend',`
+        miniGallery.insertAdjacentHTML('beforeend', `
             <figure>
                 <img src="${work.imageUrl}">
                 <button class="btnTrash"><i class="fa-regular fa-trash-can"></i></button>
@@ -68,42 +68,144 @@ function genererApercu(works) {
         `)
     });
 }
-genererApercu(works);
+
 
 //////////////////////////////////////                    ADMIN MODE
 
-//   1/ RECUPERATION DES ELEMENTS DU DOM
-const BtnModify = document.querySelector('.edit')
-console.log(BtnModify); 
-// crée le code de modalWindow et popupContent (innerAdjacentHTML)
+const token = window.localStorage.getItem("token");
+//recuperation du token, si il est dans le localStorage
 
-const adminElements = document.querySelector('.masked')
-console.log(adminElements); 
-// regroupe les éléments à faire apparaitre ou disparaitre les éléments du mode admin
+//Fonction qui vérifie la présence ou non du token dans le local storage
+// et implémente l'affichage en fonction
+function showAdminmode(token) {
+    const sectionPortfolio = document.getElementById('portfolio')
+    const adminBanner = document.querySelector('.adminBanner')
+    const logBtn = document.querySelector('.logBtn')
+
+    if (token !== null) {
+        logBtn.insertAdjacentHTML("afterbegin", `
+        <a class="logOut">logout</a>
+    `)
+        adminBanner.insertAdjacentHTML("afterbegin", `
+        <div class="bannerContent">
+        <i class="fa-regular fa-pen-to-square"></i>
+		<p>Mode édition</p>
+        </div>
+    `)
+        sectionPortfolio.insertAdjacentHTML("afterbegin", `
+		<button class="edit"><i class="fa-regular fa-pen-to-square"></i>modifier</button>
+    `)
+    } else {
+        logBtn.insertAdjacentHTML("afterbegin", `
+        <a href="./assets/login.html" class="logIn">login</a>
+    `)
+    }
+}
+showAdminmode(token)
 
 const logOut = document.querySelector('.logOut')
-console.log(logOut); 
+console.log(logOut);
 // supprime le contenu du local storage
+
+async function closePopup(event) {
+    const closePopup = document.querySelector('.closePopup')
+    closePopup.addEventListener("click", () => {
+        popup.remove();
+    })
+}
+
+function showModal(event) {
+    
+}
+
+//fonction qui affiche la modale au clic
+
+const BtnModify = document.querySelector('.edit')
+const main = document.querySelector('main')
+
+BtnModify.addEventListener("click", () => {
+    main.insertAdjacentHTML("beforeend", `
+        <div class="popup">
+            <div class="popupContent">
+                <div class="popupNav">
+                    <button class="btnPopup closePopup">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="page-one">
+                    <h3>Galerie photo</h3>
+                    <div class="miniGallery"></div>
+                    <div class="lineDecor"></div>
+                    <input type="submit" class="newProject" value="Ajouter une photo">
+                </div>
+            </div>
+        </div>
+    `)
+    genererApercu(works);
+
+    const popup = document.querySelector('.popup')
+
+    closePopup()
+
+    const newProject = document.querySelector('.newProject')
+    const popupContent = document.querySelector('.popupContent')
+
+    newProject.addEventListener("click", (event) => {
+        event.preventDefault();
+        popupContent.remove();
+        popup.insertAdjacentHTML("beforeend", `
+            <div class="popupContent">
+                <div class="popupNav">
+                    <button class="btnPopup closePopup">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                    <button class=" btnPopup previousScreen">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                </div>
+                <div class="page-two">
+					<h3>Ajout photo</h3>
+					<form action="" class="submissionPhoto">
+						<div class="selectPhoto">
+							<div class="getImg">
+								<label for="explore"><i class="fa-regular fa-image"></i></label>
+								<input id="explore"  type="file" accept=".png,.jpeg,jpeg">
+							</div>
+							<input id="addPhoto" type="submit" value="+ Ajouter photo">
+							<p>jpg, png : 4mo max</p>
+						</div>
+						<label for="title">Titre</label>
+						<input type="text" name="title" id="projectName">
+						<label for="category">Catégorie</label>
+						<input type="text" name="category" id="projectCategory">
+						<!--Attention, choisir la cat pour les listes déroulantes-->
+						<div class="lineDecor"></div>
+						<input class="addNewProject" type="submit" value="Valider">
+					</form>
+				</div>
+            </div>
+    `)
+    })
+
+})
+
+
+
+
 
 //////////////////////////////////////                    MODAL WINDOW
 
 //Page 1
 
 //   1/ RECUPERATION DES ELEMENTS DU DOM
-const modalWindow = document.querySelector('.popup')
-console.log(modalWindow); 
+
 //element général de la popup créé au clic sur BtnModify
 
-const popupContent = document.querySelector('.popupContent')
-console.log(popupContent); 
-// container pour navpopup + page 1 et page 2 (innerAdjacentHTML)
 
-const closePopup = document.querySelector('.closePopup')
-console.log(closePopup); 
-// fermer la modale (supprimer le html modalWindow)
+
 
 const btnTrash = document.querySelector('.btnTrash')
-console.log(btnTrash); 
+console.log(btnTrash);
 // supprimer un projet (fetch delete)
 
 const newProject = document.querySelector('.newProject')
@@ -117,6 +219,10 @@ console.log(previousScreen);
 // aller à la page 1 au clic
 //(effacer le contenu de popupContent,
 //injecter le code de la page 1 avec innerAdjacentHTML) )
+
+
+
+
 
 //Page 2
 
@@ -147,6 +253,7 @@ console.log(addNewProject);
 //bouton à modifier lorsque selectPhoto, projectCategory et projectName sont remplis
 //ensuite envoyer une requete post à l'api works
 
+/*
 const nameValue = document.getElementById('projectName').value
 const photoUrl = document.getElementById('explore').value
 const catValue = document.getElementById('projectCategory').value
@@ -156,14 +263,13 @@ const createProject = {
     categoryId: catValue
 }
 console.log(createProject);
+*/
 // construction du Json pour l'envoi du nouveau projet
 // à placer dans l'EventListener du bouton addNewProject
 
 
 
-/**
- * fonction à créer pour afficher/masquer les éléments admin
- */
+
 
 /**
  * fonction logout 
@@ -172,3 +278,7 @@ console.log(createProject);
 /**
  * Fonction trash
  */
+
+
+
+

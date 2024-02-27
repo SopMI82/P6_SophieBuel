@@ -8,9 +8,6 @@
     justify-content: center;
     display: flex;
     align-content: center;
-    display: flex;
-    /******************ligne a modifier
-    /* 'none' => 'flex' onclick 'edit' */
 }
 
 .popupNav {
@@ -18,6 +15,7 @@
     box-sizing: border-box;
     height: 30px;
     display: flex;
+    flex-direction: row-reverse;
     justify-content: space-between;
 
     .btnPopup {
@@ -37,12 +35,12 @@
 .popupContent {
     width: 630px;
     height: 690px;
+    display: flex;
     box-sizing: border-box;
     padding: 25px;
     gap: 25px;
     align-items: center;
     background-color: $white;
-    display: flex;
     flex-direction: column;
     border-radius: 10px;
     -webkit-border-radius: 10px;
@@ -58,9 +56,7 @@
 
 .page-one {
     width: 420px;
-    display: none;
-    /***************a modifier
-    /* 'none' => 'flex' onclick 'edit' */
+    display: flex;
     flex-direction: column;
 }
 
@@ -136,8 +132,6 @@
 .page-two {
     width: 420px;
     display: flex;
-    /***************a modifier
-    /* 'none' => 'flex' onclick 'suivant' */
     flex-direction: column;
 
     .selectPhoto {

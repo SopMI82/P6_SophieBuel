@@ -4,14 +4,14 @@
     line-height: 1.2em;
     font-size: 16px;
     position: relative;
-    top: -52px;
+    top: 25px;
     left: 65%;
     border: none;
     background-color: transparent;
     cursor: pointer;
 }
 
-.adminMode {
+.bannerContent {
     display: flex; /*'none' when unknown visitor / 'flex' when connected*/
     justify-content: center;
     width: 100vw;
