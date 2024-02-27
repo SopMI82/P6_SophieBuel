@@ -16,9 +16,7 @@
 </head>
 
 <body>
-	<div class="adminMode masked">
-		<i class="fa-regular fa-pen-to-square"></i>
-		<p>Mode édition</p>
+	<div class="adminBanner">		
 	</div>
 	<div class="mainContainer">
 		<header>
@@ -27,8 +25,7 @@
 				<ul>
 					<li>projets</li>
 					<li>contact</li>
-					<li class="logBtn logIn"><a href="./assets/login.html">login</a></li>
-					<li class="logBtn logOut masked">logout</li>
+					<li class="logBtn"></li>
 					<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 				</ul>
 			</nav>
@@ -51,8 +48,7 @@
 				</article>
 			</section>
 			<section id="portfolio">
-				<h2>Mes Projets</h2>
-				<button class="edit masked"><i class="fa-regular fa-pen-to-square"></i>modifier</button>
+				<h2 >Mes Projets</h2>
 				<div id="filters">
 					<button id="0" autofocus>Tous</button>
 				</div>
@@ -82,45 +78,6 @@
 			</nav>
 		</footer>
 
-		<!--PopUp-->
-		<div class="popup">
-			<div class="popupContent">
-				<div class="popupNav">
-					<button class=" btnPopup previousScreen">
-						<i class="fa-solid fa-arrow-left"></i>
-					</button>
-					<button class="btnPopup closePopup">
-						<i class="fa-solid fa-xmark"></i>
-					</button>
-				</div>
-				<div class="page-one">
-					<h3>Galerie photo</h3>
-					<div class="miniGallery"></div>
-					<div class="lineDecor"></div>
-					<input type="submit" class="newProject" value="Ajouter une photo">
-				</div>
-				<div class="page-two">
-					<h3>Ajout photo</h3>
-					<form action="" class="submissionPhoto">
-						<div class="selectPhoto">
-							<div class="getImg">
-								<label for="explore"><i class="fa-regular fa-image"></i></label>
-								<input id="explore"  type="file" accept=".png,.jpeg,jpeg">
-							</div>
-							<input id="addPhoto" type="submit" value="+ Ajouter photo">
-							<p>jpg, png : 4mo max</p>
-						</div>
-						<label for="title">Titre</label>
-						<input type="text" name="title" id="projectName">
-						<label for="category">Catégorie</label>
-						<input type="text" name="category" id="projectCategory">
-						<!--Attention, choisir la cat pour les listes déroulantes-->
-						<div class="lineDecor"></div>
-						<input class="addNewProject" type="submit" value="Valider">
-					</form>
-				</div>
-			</div>
-		</div>
 	</div>
 </body>
 

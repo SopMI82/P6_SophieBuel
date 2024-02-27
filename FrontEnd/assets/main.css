@@ -154,7 +154,7 @@ h2 {
   font-family: "Syne";
   font-weight: 700;
   font-size: 1.8rem;
-  color: white;
+  color: #0e2f28;
   margin-bottom: 1em;
 }
 
@@ -181,9 +181,6 @@ p {
   justify-content: center;
   display: flex;
   align-content: center;
-  display: flex;
-  /******************ligne a modifier
-  /* 'none' => 'flex' onclick 'edit' */
 }
 
 .popupNav {
@@ -191,6 +188,7 @@ p {
   box-sizing: border-box;
   height: 30px;
   display: flex;
+  flex-direction: row-reverse;
   justify-content: space-between;
 }
 .popupNav .btnPopup {
@@ -208,12 +206,12 @@ p {
 .popupContent {
   width: 630px;
   height: 690px;
+  display: flex;
   box-sizing: border-box;
   padding: 25px;
   gap: 25px;
   align-items: center;
   background-color: white;
-  display: flex;
   flex-direction: column;
   border-radius: 10px;
   -webkit-border-radius: 10px;
@@ -228,9 +226,7 @@ p {
 
 .page-one {
   width: 420px;
-  display: none;
-  /***************a modifier
-  /* 'none' => 'flex' onclick 'edit' */
+  display: flex;
   flex-direction: column;
 }
 
@@ -302,8 +298,6 @@ p {
 .page-two {
   width: 420px;
   display: flex;
-  /***************a modifier
-  /* 'none' => 'flex' onclick 'suivant' */
   flex-direction: column;
 }
 .page-two .selectPhoto * {
@@ -388,6 +382,11 @@ input[type=submit]:hover {
   border: 1px solid #B3B3B3;
   width: 100%;
   margin: 20px 0;
+}
+
+.btnTrash {
+  border: none;
+  background-color: transparent;
 }
 
 footer nav ul {
@@ -560,14 +559,14 @@ li:hover {
   line-height: 1.2em;
   font-size: 16px;
   position: relative;
-  top: -52px;
+  top: 25px;
   left: 65%;
   border: none;
   background-color: transparent;
   cursor: pointer;
 }
 
-.adminMode {
+.bannerContent {
   display: flex; /*'none' when unknown visitor / 'flex' when connected*/
   justify-content: center;
   width: 100vw;
@@ -578,7 +577,7 @@ li:hover {
   align-items: center;
   font-size: 1rem;
 }
-.adminMode p {
+.bannerContent p {
   margin: 0;
 }
 
