@@ -14,15 +14,15 @@ const btnAll = document.getElementById("0");
 const main = document.querySelector('main')
 
 const token = window.localStorage.getItem("token");
+const sectionPortfolio = document.getElementById('portfolio')
+const adminBanner = document.querySelector('.adminBanner')
+const logBtn = document.querySelector('.logBtn')
 
 /**
  * Vérifier la présence du token dans le local storage et définir l'affichage en fonction
  * @param {string} token 
  */
 function showAdminmode(token) {
-    const sectionPortfolio = document.getElementById('portfolio')
-    const adminBanner = document.querySelector('.adminBanner')
-    const logBtn = document.querySelector('.logBtn')
 
     if (token !== null) {
         logBtn.insertAdjacentHTML("afterbegin", `
@@ -108,11 +108,17 @@ function genererApercu(works) {
     });
 }
 
-function eraseToken(token) {
+function eraseToken() {
     const logOut = document.querySelector('.logOut')
     console.log(logOut);
     logOut.addEventListener("click", () => {
         window.localStorage.removeItem("token")
+        logBtn.innerHTML = ""
+        adminBanner.innerHTML = ""
+        BtnModify.remove()
+        logBtn.insertAdjacentHTML("afterbegin", `
+        <a href="./assets/login.html" class="logIn">login</a>
+    `)
     })
 }
 eraseToken()
@@ -130,6 +136,81 @@ function createModal(event) {
 }
 
 function generatePage1(event) {
+    builtP1();
+    genererApercu(works);
+    generatePage2();
+    closeModal();
+}
+
+function generatePage2(event) {
+    const newProject = document.querySelector('.newProject')
+    newProject.addEventListener("click", (event) => {
+        event.preventDefault();
+        builtP2();
+        closeModal();
+        returnPrevious()
+    })
+}
+function returnPrevious(event) {
+    const previousScreen = document.querySelector('.previousScreen')
+    previousScreen.addEventListener('click', () => {
+        generatePage1();
+    })
+}
+
+function closeModal(event) {
+    const closePopup = document.querySelector('.closePopup')
+    const popup = document.querySelector('.popup')
+    closePopup.addEventListener("click", () => {
+        popup.remove()
+    })
+}
+
+
+//afficher la modale au clic
+function runModal(event) {
+    BtnModify.addEventListener("click", () => {
+        createModal();
+        generatePage1();
+    })
+}
+runModal();
+
+function builtP2() {
+    const popupContent = document.querySelector('.popupContent')
+    popupContent.innerHTML = "";
+    popupContent.insertAdjacentHTML("beforeend", `
+        <div class="popupNav">
+            <button class="btnPopup closePopup">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <button class=" btnPopup previousScreen">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+        </div>
+        <div class="page-two">
+			<h3>Ajout photo</h3>
+			<form action="" class="createProject">
+				<div class="selectPhoto">
+					<label for="explore"><i class="fa-regular fa-image"></i></label>
+					<input id="explore"  type="file" accept=".png,.jpeg,jpeg">
+                    <div id="falseButton">+ Ajouter photo</div>
+					<p>jpg, png : 4mo max</p>
+				</div>
+				<label for="title">Titre</label>
+				<input type="text" name="title" id="projectName">
+				<label for="category">Catégorie</label>
+				<input type="text" name="category" id="projectCategory">
+			                                                                        	<!--Attention, choisir la cat pour les listes déroulantes-->
+				<div class="lineDecor"></div>
+				<input class="addNewProject" type="submit" value="Valider">
+			</form>
+		</div>
+        `)
+    recupPhoto()
+}
+
+function builtP1() {
     const popupContent = document.querySelector('.popupContent')
     popupContent.innerHTML = "";
     popupContent.insertAdjacentHTML("beforeend", `
@@ -144,70 +225,28 @@ function generatePage1(event) {
             <div class="lineDecor"></div>
             <input type="submit" class="newProject" value="Ajouter une photo">
         </div>
+    `)
+}
+
+
+
+
+//                                                       VOIR AVEC CEDRIC !!!!!!!!!!!!!!!!!!!!!
+// Ne fonctionne pas, la technique ne doit pas être bonne
+function recupPhoto() {
+    const explore = document.getElementById('explore')
+    console.log(explore);
+    explore.addEventListener('change', () => {
+        const file = EventTarget.file;
+            const imageSrc = URL.createObjectURL(file);
+            selectPhoto.insertAdjacentHTML('beforeend', `
+            <img class="prevNewProject" src="${imageSrc}">
         `)
-    genererApercu(works);
+    })    
 }
 
-function generatePage2(event) {
-    const newProject = document.querySelector('.newProject')
-    newProject.addEventListener("click", (event) => {
-        event.preventDefault();
-        const popupContent = document.querySelector('.popupContent')
-        popupContent.innerHTML = "";
-        popupContent.insertAdjacentHTML("beforeend", `
-        <div class="popupNav">
-            <button class="btnPopup closePopup">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <button class=" btnPopup previousScreen">
-                <i class="fa-solid fa-arrow-left"></i>
-            </button>
-        </div>
-        <div class="page-two">
-			<h3>Ajout photo</h3>
-			<form action="" class="submissionPhoto">
-				<div class="selectPhoto">
-					<div class="getImg">
-						<label for="explore"><i class="fa-regular fa-image"></i></label>
-						<input id="explore"  type="file" accept=".png,.jpeg,jpeg">
-					</div>
-					<input id="addPhoto" type="submit" value="+ Ajouter photo">
-					<p>jpg, png : 4mo max</p>
-				</div>
-				<label for="title">Titre</label>
-				<input type="text" name="title" id="projectName">
-				<label for="category">Catégorie</label>
-				<input type="text" name="category" id="projectCategory">
-			                                                                        	<!--Attention, choisir la cat pour les listes déroulantes-->
-				<div class="lineDecor"></div>
-				<input class="addNewProject" type="submit" value="Valider">
-			</form>
-		</div>
-        `)
-    })
-}
 
-function closeModal(event) {
-    const closePopup = document.querySelector('.closePopup')
-    const popup = document.querySelector('.popup')
-    closePopup.addEventListener("click", () => {
-        popup.remove()
-    })
-}
-
-//afficher la modale au clic
-
-BtnModify.addEventListener("click", () => {
-    createModal();
-    generatePage1();
-    generatePage2();
-    closeModal();
-})
-
-
-
-
-
+// LISTE DE VARIABLES EN ATTENTE D'UTILISATION :
 
 const btnTrash = document.querySelector('.btnTrash')
 console.log(btnTrash);
@@ -215,27 +254,9 @@ console.log(btnTrash);
 
 const newProject = document.querySelector('.newProject')
 console.log(newProject);
-// aller à la page 2 au clic 
+// aller à la page 2 au clic
 //(effacer le contenu de popupContent,
 //injecter le code de la page 2 avec innerAdjacentHTML) )
-
-const previousScreen = document.querySelector('.previousScreen')
-console.log(previousScreen);
-// aller à la page 1 au clic
-//(effacer le contenu de popupContent,
-//injecter le code de la page 1 avec innerAdjacentHTML) )
-
-
-
-
-
-//Page 2
-
-//   1/ RECUPERATION DES ELEMENTS DU DOM
-
-const explore = document.getElementById('explore')
-console.log(explore);
-//input à récupérer pour charger l'aperçu et à enregistrer dans la requet post du fichier Json works
 
 const addPhoto = document.getElementById('addPhoto')
 console.log(addPhoto);
@@ -271,12 +292,3 @@ console.log(createProject);
 */
 // construction du Json pour l'envoi du nouveau projet
 // à placer dans l'EventListener du bouton addNewProject
-
-
-/**
- * Fonction trash
- */
-
-
-
-

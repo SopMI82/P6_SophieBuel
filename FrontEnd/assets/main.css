@@ -300,32 +300,6 @@ p {
   display: flex;
   flex-direction: column;
 }
-.page-two .selectPhoto * {
-  margin: 0;
-}
-.page-two .selectPhoto .getImg {
-  display: flex;
-  justify-content: center;
-}
-.page-two .selectPhoto .getImg #explore {
-  position: absolute;
-  opacity: 0;
-  z-index: 1;
-}
-
-.submissionPhoto {
-  display: flex;
-  flex-direction: column;
-}
-.submissionPhoto .selectPhoto {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-}
-.submissionPhoto .selectPhoto .fa-image {
-  font-size: 75px;
-  line-height: 75px;
-}
 
 #filters button {
   height: 40px;
@@ -418,12 +392,19 @@ textarea {
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-.submissionPhoto {
+.createProject {
+  display: flex;
+  flex-direction: column;
   width: 420px;
   margin: auto;
 }
-.submissionPhoto .selectPhoto {
+.createProject .selectPhoto {
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
+  justify-content: center;
+  position: relative;
+  align-content: center;
   height: 170px;
   border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -433,20 +414,51 @@ textarea {
   background-color: #E8F1F6;
   text-align: center;
   color: #CBD6DC;
-  justify-content: center;
 }
-.submissionPhoto .selectPhoto input {
+.createProject .selectPhoto * {
+  margin: 0;
+}
+.createProject .selectPhoto #explore {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 1;
+}
+.createProject .selectPhoto .fa-image {
+  font-size: 75px;
+  line-height: 75px;
+}
+.createProject .selectPhoto #falseButton {
   background-color: #CBD6DC;
   color: #1D6154;
   margin: 10px auto;
+  height: 40px;
+  width: auto;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  padding: 0 30px;
+  cursor: pointer;
+  font-family: "Syne";
+  font-weight: 700;
+  height: 40px;
+  line-height: 40px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-.submissionPhoto .selectPhoto input:hover {
-  background-color: #1D6154;
-  color: white;
-}
-.submissionPhoto .selectPhoto p {
+.createProject .selectPhoto p {
   text-align: center;
   color: black;
+}
+.createProject .selectPhoto .prevNewProject {
+  width: auto;
+  height: 170px;
+  position: absolute;
+  z-index: 2;
 }
 
 .gallery {

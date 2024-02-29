@@ -12,20 +12,28 @@ label {
 input {
     height: 50px;
     font-size: 1.2em;
-    @include inputOmbre;}
+    @include inputOmbre;
+}
 
 textarea {
     @include inputOmbre;
 }
 
-.submissionPhoto {
+.createProject {
+    display: flex;
+    flex-direction: column;
     width: 420px;
     margin: auto;
 
 
     .selectPhoto {
+        display: flex;
+        flex-direction: column;
         box-sizing: border-box;
-            height: 170px;
+        justify-content: center;
+        position: relative;
+        align-content: center;
+        height: 170px;
         border-radius: 3px;
         -webkit-border-radius: 3px;
         -moz-border-radius: 3px;
@@ -34,23 +42,49 @@ textarea {
         background-color: $bg-selectPhoto;
         text-align: center;
         color: $light-grey;
-        justify-content: center;
 
-        input {
+        * {
+            margin: 0;
+        }
+        
+        #explore {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            z-index: 1;
+        }
+
+
+        .fa-image {
+            font-size: 75px;
+            line-height: 75px;
+        }
+
+        #falseButton {
             background-color: $light-grey;
             color: $main-color;
             margin: 10px auto;
-
-            &:hover {
-                background-color: $main-color;
-                color: $white;
-            }
+            @include btnRounded;
+            font-family: 'Syne';
+            font-weight: 700;
+            height: 40px;
+            line-height: 40px;
+            font-size: 1.2em;
+            @include inputOmbre;
         }
 
         p {
             text-align: center;
             color: $black;
         }
+
+        .prevNewProject {
+            width: auto;
+            height: 170px;
+            position: absolute;
+            z-index: 2;
+        }
     }
-    
+
 }

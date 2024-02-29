@@ -133,34 +133,5 @@
     width: 420px;
     display: flex;
     flex-direction: column;
-
-    .selectPhoto {
-        * {
-            margin: 0;
-        }
-        .getImg{
-            display: flex;
-            justify-content: center;
-        #explore{
-            position: absolute;
-            opacity: 0;
-            z-index: 1;
-        }}
-    }
 }
 
-.submissionPhoto {
-    display: flex;
-    flex-direction: column;
-
-    .selectPhoto {
-        display: flex;
-        flex-direction: column;
-        align-content: center;
-
-        .fa-image {
-            font-size: 75px;
-            line-height: 75px;
-        }
-    }
-}

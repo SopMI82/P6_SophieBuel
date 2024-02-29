@@ -23,7 +23,7 @@ btnConnect.addEventListener("click", (event) => {
                 const token = data.token
                 localStorage.setItem('token', token)
                 console.log(localStorage);
- //               window.location.href = "./index.html";
+                window.location.href = "../index.html";
             }
         })
         .catch(error => {
