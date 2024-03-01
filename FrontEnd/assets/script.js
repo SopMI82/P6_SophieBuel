@@ -108,6 +108,10 @@ function genererApercu(works) {
     });
 }
 
+/**
+ * Supprimer le token du local storage
+ * @param {string} token 
+ */
 function eraseToken() {
     const logOut = document.querySelector('.logOut')
     console.log(logOut);
@@ -125,6 +129,14 @@ eraseToken()
 
 //////////////////////////////////////                    Modal Window
 
+//afficher la modale au clic
+function runModal(event) {
+    BtnModify.addEventListener("click", () => {
+        createModal();
+        generatePage1();
+    })
+}
+runModal();
 
 function createModal(event) {
     main.insertAdjacentHTML("beforeend", `
@@ -165,16 +177,6 @@ function closeModal(event) {
         popup.remove()
     })
 }
-
-
-//afficher la modale au clic
-function runModal(event) {
-    BtnModify.addEventListener("click", () => {
-        createModal();
-        generatePage1();
-    })
-}
-runModal();
 
 function builtP2() {
     const popupContent = document.querySelector('.popupContent')
@@ -235,13 +237,16 @@ function builtP1() {
 // Ne fonctionne pas, la technique ne doit pas être bonne
 function recupPhoto() {
     const explore = document.getElementById('explore')
+    const selectPhoto = document.querySelector('.selectPhoto')
     console.log(explore);
+    console.log(selectPhoto);
     explore.addEventListener('change', () => {
         const file = EventTarget.file;
             const imageSrc = URL.createObjectURL(file);
             selectPhoto.insertAdjacentHTML('beforeend', `
             <img class="prevNewProject" src="${imageSrc}">
         `)
+
     })    
 }
 
@@ -251,20 +256,6 @@ function recupPhoto() {
 const btnTrash = document.querySelector('.btnTrash')
 console.log(btnTrash);
 // supprimer un projet (fetch delete)
-
-const newProject = document.querySelector('.newProject')
-console.log(newProject);
-// aller à la page 2 au clic
-//(effacer le contenu de popupContent,
-//injecter le code de la page 2 avec innerAdjacentHTML) )
-
-const addPhoto = document.getElementById('addPhoto')
-console.log(addPhoto);
-//bouton à écouter pour charger l'image de l'apercu dans la div selectPhoto
-
-const selectPhoto = document.querySelector('.selectPhoto')
-console.log(selectPhoto);
-//au clic sur addPhoto, cette div sera vidée, puis on y injecte un aperçu de l'image
 
 const projectName = document.getElementById('projectName')
 console.log(projectName);
@@ -276,13 +267,22 @@ console.log(projectCategory);
 
 const addNewProject = document.querySelector('.addNewProject')
 console.log(addNewProject);
-//bouton à modifier lorsque selectPhoto, projectCategory et projectName sont remplis
-//ensuite envoyer une requete post à l'api works
+//couleur du bouton à modifier, et rendre le bouton clicquable lorsque selectPhoto, projectCategory et projectName sont remplis
+//au clic envoyer une requete post à l'api works pour créer une nouvelle entrée
+// construction du Json pour l'envoi du nouveau projet
+// (à placer dans l'EventListener du bouton addNewProject)
 
 /*
 const nameValue = document.getElementById('projectName').value
-const photoUrl = document.getElementById('explore').value
+//donnée à envoyer à l'API works en POST sous la ref "title"
+
+const imageSrc = document.getElementById('explore').value
+//donnée à envoyer à l'API works en POST sous la ref "imageURL"
+
+
 const catValue = document.getElementById('projectCategory').value
+//donnée à envoyer à l'API works en POST sous la ref "categoryId"
+
 const createProject = {
     title: nameValue,
     imageUrl: photoUrl,
@@ -290,5 +290,3 @@ const createProject = {
 }
 console.log(createProject);
 */
-// construction du Json pour l'envoi du nouveau projet
-// à placer dans l'EventListener du bouton addNewProject
