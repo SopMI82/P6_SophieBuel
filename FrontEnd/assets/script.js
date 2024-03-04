@@ -1,11 +1,19 @@
 //import { ajoutListenersAvis } from "./login.js";
 
 // Récupération des projets depuis l'api
-const responseCategories = await fetch('http://localhost:5678/api/categories')
-const categories = await responseCategories.json();
 
-const responseWorks = await fetch('http://localhost:5678/api/works')
-const works = await responseWorks.json();
+async function getCategories() {
+    const responseCategories = await fetch('http://localhost:5678/api/categories')
+    const categories = await responseCategories.json();
+    return categories;
+}
+async function getWorks() {
+    const responseWorks = await fetch('http://localhost:5678/api/works')
+    let works = await responseWorks.json();
+    console.log(works);
+    return works;
+}
+
 
 // Récupération des éléments du DOM
 const gallery = document.querySelector('.gallery');
@@ -13,7 +21,6 @@ const btnAll = document.getElementById("0");
 
 const main = document.querySelector('main')
 
-const token = window.localStorage.getItem("token");
 const sectionPortfolio = document.getElementById('portfolio')
 const adminBanner = document.querySelector('.adminBanner')
 const logBtn = document.querySelector('.logBtn')
@@ -22,8 +29,8 @@ const logBtn = document.querySelector('.logBtn')
  * Vérifier la présence du token dans le local storage et définir l'affichage en fonction
  * @param {string} token 
  */
-function showAdminmode(token) {
-
+function showAdminmode() {
+    let token = window.localStorage.getItem("token");
     if (token !== null) {
         logBtn.insertAdjacentHTML("afterbegin", `
         <a class="logOut">logout</a>
@@ -43,17 +50,16 @@ function showAdminmode(token) {
     `)
     }
 }
-showAdminmode(token)
 
 const BtnModify = document.querySelector('.edit')
 console.log(BtnModify);
 
 /**
  * Fonction qui importe les projets de manière dynamique
- * @param {Array} works 
+ * @param {Array} data 
  */
-function genererProjects(works) {
-    works.forEach(work => {
+async function genererProjects(data) {
+    data.works.forEach (work => {
         gallery.insertAdjacentHTML('beforeend', `
             <figure>
                 <img src="${work.imageUrl}">
@@ -62,7 +68,6 @@ function genererProjects(works) {
         `)
     });
 }
-genererProjects(works);
 
 /**
  * Fonction qui créée les boutons'categories' de manière dynamique
@@ -81,15 +86,9 @@ function generateBtn(categories) {
         })
     })
 }
-generateBtn(categories)
 
-/**
- * Bouton qui gère l'affichage de tous les projets
- */
-btnAll.addEventListener("click", () => {
-    gallery.innerHTML = "";
-    genererProjects(works);
-})
+
+
 
 /**
  * Générer l'affichage de la gallerie dans la popup
@@ -102,7 +101,7 @@ function genererApercu(works) {
         miniGallery.insertAdjacentHTML('beforeend', `
             <figure>
                 <img src="${work.imageUrl}">
-                <button class="btnTrash"><i class="fa-regular fa-trash-can"></i></button>
+                <button class="btnTrash" id="${work.id}"><i class="fa-regular fa-trash-can"></i></button>
             </figure>
         `)
     });
@@ -125,18 +124,10 @@ function eraseToken() {
     `)
     })
 }
-eraseToken()
 
 //////////////////////////////////////                    Modal Window
 
-//afficher la modale au clic
-function runModal(event) {
-    BtnModify.addEventListener("click", () => {
-        createModal();
-        generatePage1();
-    })
-}
-runModal();
+
 
 function createModal(event) {
     main.insertAdjacentHTML("beforeend", `
@@ -199,11 +190,10 @@ function builtP2() {
                     <div id="falseButton">+ Ajouter photo</div>
 					<p>jpg, png : 4mo max</p>
 				</div>
-				<label for="title">Titre</label>
+				<label for="title">Titre :</label>
 				<input type="text" name="title" id="projectName">
-				<label for="category">Catégorie</label>
-				<input type="text" name="category" id="projectCategory">
-			                                                                        	<!--Attention, choisir la cat pour les listes déroulantes-->
+				<label for="projectCategory">Catégorie :</label>
+				<select name="category" id="projectCategory">
 				<div class="lineDecor"></div>
 				<input class="addNewProject" type="submit" value="Valider">
 			</form>
@@ -242,27 +232,40 @@ function recupPhoto() {
     console.log(selectPhoto);
     explore.addEventListener('change', () => {
         const file = EventTarget.file;
-            const imageSrc = URL.createObjectURL(file);
-            selectPhoto.insertAdjacentHTML('beforeend', `
+        const imageSrc = URL.createObjectURL(file);
+        selectPhoto.insertAdjacentHTML('beforeend', `
             <img class="prevNewProject" src="${imageSrc}">
         `)
 
-    })    
+    })
 }
 
 
 // LISTE DE VARIABLES EN ATTENTE D'UTILISATION :
 
-const btnTrash = document.querySelector('.btnTrash')
+/*const btnTrash = document.querySelector('.btnTrash')
 console.log(btnTrash);
+btnTrash.addEventListener("click", (event) => {
+    const idProject = event.target.id;
+    fetch(`http://localhost:5678/api/works/${idProject}`)
+        .then(() => {
+            generatePage1()
+        })
+})*/
 // supprimer un projet (fetch delete)
 
 const projectName = document.getElementById('projectName')
 console.log(projectName);
 //input à écouter (change) pour vérifier que la zone est bien remplie
 
+/*
 const projectCategory = document.getElementById('projectCategory')
 console.log(projectCategory);
+projectCategory.insertAdjacentHTML ("afterend", `
+    <option>${}</option>
+`)
+*/
+
 //input à écouter (change) pour vérifier que la selection est bien faite
 
 const addNewProject = document.querySelector('.addNewProject')
@@ -290,3 +293,28 @@ const createProject = {
 }
 console.log(createProject);
 */
+getCategories()
+    .then((categories) => {
+        generateBtn(categories)
+        return { works: null, categories }
+    })
+    .then((categories) => {
+        return { works: getWorks(), categories }    
+    })
+    .then((data) => {
+        console.log(data.works);
+        genererProjects(data.works)
+        btnAll.addEventListener("click", () => {
+            gallery.innerHTML = "";
+            genererProjects(data.works);
+        })
+        showAdminmode()
+        return data
+    })
+    /*.then(() => {
+        eraseToken();
+        BtnModify.addEventListener("click", () => {
+            createModal();
+            generatePage1();
+        })
+    })*/
