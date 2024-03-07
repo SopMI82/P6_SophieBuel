@@ -1,18 +1,27 @@
-//import { ajoutListenersAvis } from "./login.js";
+let works = []
+let categories = []
+
 
 // Récupération des projets depuis l'api
-const responseCategories = await fetch('http://localhost:5678/api/categories')
-const categories = await responseCategories.json();
+async function getCategories() {
+    const responseCategories = await fetch('http://localhost:5678/api/categories');
+    categories = await responseCategories.json();
+    console.log(categories);
+    return categories;
+}
 
-const responseWorks = await fetch('http://localhost:5678/api/works')
-const works = await responseWorks.json();
+async function getWorks() {
+    const responseWorks = await fetch('http://localhost:5678/api/works')
+    works = await responseWorks.json();
+    console.log(works);
+
+    return works;
+}
 
 // Récupération des éléments du DOM
 const gallery = document.querySelector('.gallery');
 const btnAll = document.getElementById("0");
-
 const main = document.querySelector('main')
-
 const token = window.localStorage.getItem("token");
 const sectionPortfolio = document.getElementById('portfolio')
 const adminBanner = document.querySelector('.adminBanner')
@@ -43,16 +52,30 @@ function showAdminmode(token) {
     `)
     }
 }
-showAdminmode(token)
 
-const BtnModify = document.querySelector('.edit')
-console.log(BtnModify);
+/**
+ * Supprimer le token du local storage
+ * @param {string} token 
+ */
+function eraseToken() {
+    const logOut = document.querySelector('.logOut')
+    console.log(logOut);
+    logOut.addEventListener("click", () => {
+        window.localStorage.removeItem("token")
+        logBtn.innerHTML = ""
+        adminBanner.innerHTML = ""
+        BtnModify.remove()
+        logBtn.insertAdjacentHTML("afterbegin", `
+        <a href="./assets/login.html" class="logIn">login</a>
+    `)
+    })
+}
 
 /**
  * Fonction qui importe les projets de manière dynamique
  * @param {Array} works 
  */
-function genererProjects(works) {
+async function genererProjects(works) {
     works.forEach(work => {
         gallery.insertAdjacentHTML('beforeend', `
             <figure>
@@ -62,7 +85,8 @@ function genererProjects(works) {
         `)
     });
 }
-genererProjects(works);
+
+
 
 /**
  * Fonction qui créée les boutons'categories' de manière dynamique
@@ -81,7 +105,6 @@ function generateBtn(categories) {
         })
     })
 }
-generateBtn(categories)
 
 /**
  * Bouton qui gère l'affichage de tous les projets
@@ -102,42 +125,45 @@ function genererApercu(works) {
         miniGallery.insertAdjacentHTML('beforeend', `
             <figure>
                 <img src="${work.imageUrl}">
-                <button class="btnTrash"><i class="fa-regular fa-trash-can"></i></button>
+                <button class="btnTrash" id="${work.id}"><i class="fa-regular fa-trash-can"></i></button>
             </figure>
         `)
-    });
-}
-
-/**
- * Supprimer le token du local storage
- * @param {string} token 
- */
-function eraseToken() {
-    const logOut = document.querySelector('.logOut')
-    console.log(logOut);
-    logOut.addEventListener("click", () => {
-        window.localStorage.removeItem("token")
-        logBtn.innerHTML = ""
-        adminBanner.innerHTML = ""
-        BtnModify.remove()
-        logBtn.insertAdjacentHTML("afterbegin", `
-        <a href="./assets/login.html" class="logIn">login</a>
-    `)
     })
-}
-eraseToken()
+
+    const btnTrash = document.querySelectorAll('.btnTrash')
+    console.log(btnTrash);
+
+    btnTrash.forEach(btnTrash => {
+        btnTrash.addEventListener('click', (event) => {
+            let clickedProject = event.target;
+            let projectId = clickedProject.id;
+            console.log(projectId);
+//            deleteWork(projectId)
+        })
+    });
+};
+
+
+
 
 //////////////////////////////////////                    Modal Window
 
-//afficher la modale au clic
-function runModal(event) {
+
+/**
+ * Fonction qui affiche la modale au clic
+ */
+function runModal() {
+    const BtnModify = document.querySelector('.edit')
+    console.log(BtnModify);
     BtnModify.addEventListener("click", () => {
         createModal();
         generatePage1();
     })
 }
-runModal();
 
+/**
+ * Sous-fonction qui crée le conteneur de la page modale
+ */
 function createModal(event) {
     main.insertAdjacentHTML("beforeend", `
         <div class="popup">
@@ -147,6 +173,9 @@ function createModal(event) {
         `)
 }
 
+/**
+ * Sous-fonction qui crée la structure de la première page de la modale
+ */
 function generatePage1(event) {
     builtP1();
     genererApercu(works);
@@ -154,6 +183,9 @@ function generatePage1(event) {
     closeModal();
 }
 
+/**
+ * Sous-fonction qui crée la structure de la deuxième page de la modale
+ */
 function generatePage2(event) {
     const newProject = document.querySelector('.newProject')
     newProject.addEventListener("click", (event) => {
@@ -163,6 +195,10 @@ function generatePage2(event) {
         returnPrevious()
     })
 }
+
+/**
+ * Sous-fonction qui gère le clic sur la flèche pour revenir à l'écran précédent
+ */
 function returnPrevious(event) {
     const previousScreen = document.querySelector('.previousScreen')
     previousScreen.addEventListener('click', () => {
@@ -170,6 +206,9 @@ function returnPrevious(event) {
     })
 }
 
+/**
+ * Sous-fonction qui gère la fermeture de la modale
+ */
 function closeModal(event) {
     const closePopup = document.querySelector('.closePopup')
     const popup = document.querySelector('.popup')
@@ -178,6 +217,30 @@ function closeModal(event) {
     })
 }
 
+/**
+ * Sous-fonction qui crée le contenu de la première page de la modale
+ */
+function builtP1() {
+    const popupContent = document.querySelector('.popupContent')
+    popupContent.innerHTML = "";
+    popupContent.insertAdjacentHTML("beforeend", `
+        <div class="popupNav">
+            <button class="btnPopup closePopup">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="page-one">
+            <h3>Galerie photo</h3>
+            <div class="miniGallery"></div>
+            <div class="lineDecor"></div>
+            <input type="submit" class="newProject" value="Ajouter une photo">
+        </div>
+    `)
+}
+
+/**
+ * Sous-fonction qui crée le contenu de la deuxième page de la modale
+ */
 function builtP2() {
     const popupContent = document.querySelector('.popupContent')
     popupContent.innerHTML = "";
@@ -201,43 +264,58 @@ function builtP2() {
 				</div>
 				<label for="title">Titre</label>
 				<input type="text" name="title" id="projectName">
-				<label for="category">Catégorie</label>
-				<input type="text" name="category" id="projectCategory">
-			                                                                        	<!--Attention, choisir la cat pour les listes déroulantes-->
+				<label for="projectCategory">Catégorie :</label>
+				<select name="category" id="projectCategory">	            <!--Attention, insérer dynamiquement les <option></option> pour chaque categorie-->
 				<div class="lineDecor"></div>
 				<input class="addNewProject" type="submit" value="Valider">
 			</form>
 		</div>
         `)
-    recupPhoto()
-}
-
-function builtP1() {
-    const popupContent = document.querySelector('.popupContent')
-    popupContent.innerHTML = "";
-    popupContent.insertAdjacentHTML("beforeend", `
-        <div class="popupNav">
-            <button class="btnPopup closePopup">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-        </div>
-        <div class="page-one">
-            <h3>Galerie photo</h3>
-            <div class="miniGallery"></div>
-            <div class="lineDecor"></div>
-            <input type="submit" class="newProject" value="Ajouter une photo">
-        </div>
-    `)
 }
 
 
+//__________________________________________________FONCTION PRINCIPALE___________________________________
+
+function run() {
+    showAdminmode()
+    eraseToken()
+    getWorks()
+        .then((works) => {
+            genererProjects(works);
+        })
+    getCategories()
+        .then((categories) => {
+            generateBtn(categories)
+        })
+    runModal();
+    genererApercu(works)
+}
+run()
 
 
-//                                                       VOIR AVEC CEDRIC !!!!!!!!!!!!!!!!!!!!!
+//____________________________________________________BROUILLONS PAS ENCORE FONCTIONNELS_______________________________________________________________
+
+/*
+// supprimer un projet (fetch delete)
+
+async function deletework() {
+    const response = await fetch(`http://localhost:5678/api/works/${id}`,
+        method: 'DELETE',
+        headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+    })
+        .then(() => {
+            genererApercu(works);
+        })
+}
+
+// Afficher l'apperçu de l'image sélectionnée
 // Ne fonctionne pas, la technique ne doit pas être bonne
+
 function recupPhoto() {
-    const explore = document.getElementById('explore')
-    const selectPhoto = document.querySelector('.selectPhoto')
+    const explore = document.getElementById('explore');
+    const selectPhoto = document.querySelector('.selectPhoto');
     console.log(explore);
     console.log(selectPhoto);
     explore.addEventListener('change', () => {
@@ -245,48 +323,41 @@ function recupPhoto() {
             const imageSrc = URL.createObjectURL(file);
             selectPhoto.insertAdjacentHTML('beforeend', `
             <img class="prevNewProject" src="${imageSrc}">
-        `)
-
+        `);
     })    
 }
+recupPhoto()
 
+// Récupérer les infos pour créer un nouveau projet :
 
-// LISTE DE VARIABLES EN ATTENTE D'UTILISATION :
+const projectName = document.getElementById('projectName');
+console.log(projectName);               //input à écouter (change) pour vérifier que la zone est bien remplie
 
-const btnTrash = document.querySelector('.btnTrash')
-console.log(btnTrash);
-// supprimer un projet (fetch delete)
+const projectCategory = document.getElementById('projectCategory');
+console.log(projectCategory);           //input à écouter (change) pour vérifier que la selection est bien faite
 
-const projectName = document.getElementById('projectName')
-console.log(projectName);
-//input à écouter (change) pour vérifier que la zone est bien remplie
-
-const projectCategory = document.getElementById('projectCategory')
-console.log(projectCategory);
-//input à écouter (change) pour vérifier que la selection est bien faite
-
-const addNewProject = document.querySelector('.addNewProject')
+const addNewProject = document.querySelector('.addNewProject');
 console.log(addNewProject);
-//couleur du bouton à modifier, et rendre le bouton clicquable lorsque selectPhoto, projectCategory et projectName sont remplis
-//au clic envoyer une requete post à l'api works pour créer une nouvelle entrée
-// construction du Json pour l'envoi du nouveau projet
-// (à placer dans l'EventListener du bouton addNewProject)
+                                        //couleur du bouton à modifier, et rendre le bouton clicquable lorsque selectPhoto, projectCategory et projectName sont remplis
+                                        //au clic envoyer une requete post à l'api works pour créer une nouvelle entrée
+                                        // construction du Json pour l'envoi du nouveau projet
+                                        // (à placer dans l'EventListener du bouton addNewProject)
 
-/*
-const nameValue = document.getElementById('projectName').value
-//donnée à envoyer à l'API works en POST sous la ref "title"
+const nameValue = document.getElementById('projectName').value;
+                                        //donnée à envoyer à l'API works en POST sous la ref "title"
 
-const imageSrc = document.getElementById('explore').value
-//donnée à envoyer à l'API works en POST sous la ref "imageURL"
+const imageSrc = document.getElementById('explore').value;
+                                        //donnée à envoyer à l'API works en POST sous la ref "imageURL"
 
-
-const catValue = document.getElementById('projectCategory').value
-//donnée à envoyer à l'API works en POST sous la ref "categoryId"
+const catValue = document.getElementById('projectCategory').value;
+                                        //donnée à envoyer à l'API works en POST sous la ref "categoryId"
 
 const createProject = {
+    id : works.lenght+1,
     title: nameValue,
     imageUrl: photoUrl,
     categoryId: catValue
-}
+};
+
 console.log(createProject);
 */
