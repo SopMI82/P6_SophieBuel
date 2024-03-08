@@ -1,7 +1,6 @@
 let works = []
 let categories = []
 
-
 // Récupération des projets depuis l'api
 async function getCategories() {
     const responseCategories = await fetch('http://localhost:5678/api/categories');
@@ -14,24 +13,35 @@ async function getWorks() {
     const responseWorks = await fetch('http://localhost:5678/api/works')
     works = await responseWorks.json();
     console.log(works);
-
     return works;
 }
 
 // Récupération des éléments du DOM
 const gallery = document.querySelector('.gallery');
 const btnAll = document.getElementById("0");
-const main = document.querySelector('main')
+const main = document.querySelector('main');
 const token = window.localStorage.getItem("token");
-const sectionPortfolio = document.getElementById('portfolio')
-const adminBanner = document.querySelector('.adminBanner')
-const logBtn = document.querySelector('.logBtn')
+const filters = document.getElementById('filters');
+const logBtn = document.querySelector('.logBtn');
+
+function displayModal() {
+    createModal();
+    generatePage1();
+}
+
+function displayEditModal() {
+    const btn = `<button onClick="displayModal()" class="edit"><i class="fa-regular fa-pen-to-square"></i>modifier</button>`;
+    return btn;
+}
 
 /**
  * Vérifier la présence du token dans le local storage et définir l'affichage en fonction
- * @param {string} token 
  */
-function showAdminmode(token) {
+function showAdminmode() {
+
+    const token = window.localStorage.getItem("token");
+    const adminBanner = document.querySelector('.adminBanner')
+    const btnEdit = document.getElementById('edit')
 
     if (token !== null) {
         logBtn.insertAdjacentHTML("afterbegin", `
@@ -43,10 +53,15 @@ function showAdminmode(token) {
 		<p>Mode édition</p>
         </div>
     `)
-        sectionPortfolio.insertAdjacentHTML("afterbegin", `
-		<button class="edit"><i class="fa-regular fa-pen-to-square"></i>modifier</button>
-    `)
+        btnEdit.insertAdjacentHTML("afterbegin", displayEditModal())
+        filters.style.display = "none"
+        eraseToken();
+
     } else {
+        filters.display = "flex"
+        adminBanner.innerHTML = ""
+        btnEdit.remove()
+        logBtn.innerHTML = ""
         logBtn.insertAdjacentHTML("afterbegin", `
         <a href="./assets/login.html" class="logIn">login</a>
     `)
@@ -58,16 +73,12 @@ function showAdminmode(token) {
  * @param {string} token 
  */
 function eraseToken() {
-    const logOut = document.querySelector('.logOut')
+
+    const logOut = document.querySelector('.logOut');
     console.log(logOut);
     logOut.addEventListener("click", () => {
-        window.localStorage.removeItem("token")
-        logBtn.innerHTML = ""
-        adminBanner.innerHTML = ""
-        BtnModify.remove()
-        logBtn.insertAdjacentHTML("afterbegin", `
-        <a href="./assets/login.html" class="logIn">login</a>
-    `)
+        window.localStorage.removeItem("token");
+        showAdminmode();
     })
 }
 
@@ -86,14 +97,11 @@ async function genererProjects(works) {
     });
 }
 
-
-
 /**
  * Fonction qui créée les boutons'categories' de manière dynamique
  * @param {Array} categories 
  */
 function generateBtn(categories) {
-    const filters = document.getElementById('filters')
     categories.forEach(category => {
         const btn = `<button id="${category.id}"> ${category.name}</button>`
         filters.insertAdjacentHTML('beforeend', btn)
@@ -120,6 +128,7 @@ btnAll.addEventListener("click", () => {
  */
 function genererApercu(works) {
     const miniGallery = document.querySelector(".miniGallery");
+    miniGallery.innerHTML = "";
 
     works.forEach(work => {
         miniGallery.insertAdjacentHTML('beforeend', `
@@ -127,21 +136,40 @@ function genererApercu(works) {
                 <img src="${work.imageUrl}">
                 <button class="btnTrash" id="${work.id}"><i class="fa-regular fa-trash-can"></i></button>
             </figure>
-        `)
+        `);
     })
 
-    const btnTrash = document.querySelectorAll('.btnTrash')
+    const btnTrash = document.querySelectorAll('.btnTrash');
     console.log(btnTrash);
 
     btnTrash.forEach(btnTrash => {
         btnTrash.addEventListener('click', (event) => {
-            let clickedProject = event.target;
+            event.preventDefault();
+            let clickedProject = event.target.parentNode;
+            console.log(clickedProject);
             let projectId = clickedProject.id;
             console.log(projectId);
-//            deleteWork(projectId)
+            deleteWork(projectId);
         })
     });
 };
+
+// supprimer un projet (fetch delete)
+
+function deleteWork(projectId) {
+    const token = window.localStorage.getItem("token");
+    fetch(`http://localhost:5678/api/works/${projectId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    })
+        .then(() => {
+            genererApercu(works);
+        })
+}
+
 
 
 
@@ -155,7 +183,7 @@ function genererApercu(works) {
 function runModal() {
     const BtnModify = document.querySelector('.edit')
     console.log(BtnModify);
-    BtnModify.addEventListener("click", () => {
+    btnEdit.addEventListener("click", () => {
         createModal();
         generatePage1();
     })
@@ -258,7 +286,9 @@ function builtP2() {
 			<form action="" class="createProject">
 				<div class="selectPhoto">
 					<label for="explore"><i class="fa-regular fa-image"></i></label>
-					<input id="explore"  type="file" accept=".png,.jpeg,jpeg">
+					<input id="explore" type="file" accept=".png,.jpeg,.jpeg">
+<!-TODO d'ou vient le false button en id ligne 191 ?-!>
+
                     <div id="falseButton">+ Ajouter photo</div>
 					<p>jpg, png : 4mo max</p>
 				</div>
@@ -278,7 +308,6 @@ function builtP2() {
 
 function run() {
     showAdminmode()
-    eraseToken()
     getWorks()
         .then((works) => {
             genererProjects(works);
@@ -287,46 +316,32 @@ function run() {
         .then((categories) => {
             generateBtn(categories)
         })
-    runModal();
-    genererApercu(works)
 }
 run()
-
-
-//____________________________________________________BROUILLONS PAS ENCORE FONCTIONNELS_______________________________________________________________
-
-/*
-// supprimer un projet (fetch delete)
-
-async function deletework() {
-    const response = await fetch(`http://localhost:5678/api/works/${id}`,
-        method: 'DELETE',
-        headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-    })
-        .then(() => {
-            genererApercu(works);
-        })
-}
-
-// Afficher l'apperçu de l'image sélectionnée
-// Ne fonctionne pas, la technique ne doit pas être bonne
 
 function recupPhoto() {
     const explore = document.getElementById('explore');
     const selectPhoto = document.querySelector('.selectPhoto');
     console.log(explore);
     console.log(selectPhoto);
-    explore.addEventListener('change', () => {
-        const file = EventTarget.file;
-            const imageSrc = URL.createObjectURL(file);
-            selectPhoto.insertAdjacentHTML('beforeend', `
+    explore.addEventListener('change', (event) => {
+        const file = event.target.file;
+        const imageSrc = URL.createObjectURL(file);
+        selectPhoto.insertAdjacentHTML('beforeend', `
             <img class="prevNewProject" src="${imageSrc}">
         `);
-    })    
+        console.log(imageSrc);
+    })
 }
 recupPhoto()
+//____________________________________________________BROUILLONS PAS ENCORE FONCTIONNELS_______________________________________________________________
+
+/*
+
+// Afficher l'apperçu de l'image sélectionnée
+// Ne fonctionne pas, la technique ne doit pas être bonne
+
+
 
 // Récupérer les infos pour créer un nouveau projet :
 
