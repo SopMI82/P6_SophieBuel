@@ -58,7 +58,7 @@ function showAdminmode() {
         eraseToken();
 
     } else {
-        filters.display = "flex"
+        filters.style.display = "flex"
         adminBanner.innerHTML = ""
         btnEdit.remove()
         logBtn.innerHTML = ""
@@ -72,13 +72,13 @@ function showAdminmode() {
  * Supprimer le token du local storage
  * @param {string} token 
  */
-function eraseToken() {
+function eraseToken(token) {
 
     const logOut = document.querySelector('.logOut');
     console.log(logOut);
     logOut.addEventListener("click", () => {
         window.localStorage.removeItem("token");
-        showAdminmode();
+        showAdminmode(token);
     })
 }
 
@@ -287,27 +287,29 @@ function builtP2() {
 				<div class="selectPhoto">
 					<label for="explore"><i class="fa-regular fa-image"></i></label>
 					<input id="explore" type="file" accept=".png,.jpeg,.jpeg">
-<!-TODO d'ou vient le false button en id ligne 191 ?-!>
-
-                    <div id="falseButton">+ Ajouter photo</div>
+                    <div id="btnAddPhoto">+ Ajouter photo</div>
 					<p>jpg, png : 4mo max</p>
+                    <img class="prevNewProject" src="#">
 				</div>
 				<label for="title">Titre</label>
 				<input type="text" name="title" id="projectName">
 				<label for="projectCategory">Catégorie :</label>
-				<select name="category" id="projectCategory">	            <!--Attention, insérer dynamiquement les <option></option> pour chaque categorie-->
+				<select name="category" id="projectCategory">
+                    <option value="">Choisir une catégorie</option>            <!--Attention, insérer dynamiquement les <option></option> pour chaque categorie-->
 				<div class="lineDecor"></div>
 				<input class="addNewProject" type="submit" value="Valider">
 			</form>
 		</div>
         `)
+    recupPhoto()
+    generateOptions(categories)
+    publishProject()
 }
 
 
 //__________________________________________________FONCTION PRINCIPALE___________________________________
 
 function run() {
-    showAdminmode()
     getWorks()
         .then((works) => {
             genererProjects(works);
@@ -316,55 +318,92 @@ function run() {
         .then((categories) => {
             generateBtn(categories)
         })
+    showAdminmode()
 }
 run()
 
 function recupPhoto() {
     const explore = document.getElementById('explore');
-    const selectPhoto = document.querySelector('.selectPhoto');
+    const prevNewProject = document.querySelector('.prevNewProject');
     console.log(explore);
-    console.log(selectPhoto);
+    console.log(prevNewProject);
     explore.addEventListener('change', (event) => {
-        const file = event.target.file;
-        const imageSrc = URL.createObjectURL(file);
-        selectPhoto.insertAdjacentHTML('beforeend', `
-            <img class="prevNewProject" src="${imageSrc}">
-        `);
-        console.log(imageSrc);
+        if (event.target.files.length > 0) {
+            prevNewProject.src = URL.createObjectURL(event.target.files[0]);
+            prevNewProject.style.display = "block";
+        }
     })
 }
-recupPhoto()
+
+
+/**
+ * Fonction qui créée les options du formulaire de manière dynamique
+ * @param {Array} categories 
+ */
+function generateOptions(categories) {
+    categories.forEach(category => {
+        const baliseSelect = document.getElementById('projectCategory');
+        console.log(baliseSelect);
+        const catOption = `<option value="${category.id}">${category.name}</option>`;
+        baliseSelect.insertAdjacentHTML('beforeend', catOption);
+        })
+}
+
+function publishProject() {
+const projectName = document.getElementById('projectName');
+console.log(projectName);    
+const projectCategory = document.getElementById('projectCategory');
+console.log(projectCategory);
+const addNewProject = document.querySelector('.addNewProject');
+console.log(addNewProject);
+
+addNewProject.addEventListener('click', (event) => {
+    event.preventDefault()
+// données à récolter pour envoyer à l'API :
+    const nameValue = document.getElementById('projectName').value;
+    const imageSrc = document.getElementById('explore').value;
+    const catValue = document.getElementById('projectCategory').value;
+//test :
+    console.log(nameValue);
+    console.log(imageSrc);
+    console.log(catValue);    
+})
+
+
+    const createProject = {
+        id: works.lenght + 1,
+        title: document.getElementById('explore').value,
+        imageUrl: document.getElementById('explore').value,
+        categoryId: document.getElementById('projectCategory').value
+    };
+
+    console.log(createProject);
+
+}
+
+
 //____________________________________________________BROUILLONS PAS ENCORE FONCTIONNELS_______________________________________________________________
 
 /*
-
-// Afficher l'apperçu de l'image sélectionnée
-// Ne fonctionne pas, la technique ne doit pas être bonne
 
 
 
 // Récupérer les infos pour créer un nouveau projet :
 
-const projectName = document.getElementById('projectName');
-console.log(projectName);               //input à écouter (change) pour vérifier que la zone est bien remplie
+               //input à écouter (change) pour vérifier que la zone est bien remplie
 
-const projectCategory = document.getElementById('projectCategory');
-console.log(projectCategory);           //input à écouter (change) pour vérifier que la selection est bien faite
+           //input à écouter (change) pour vérifier que la selection est bien faite
 
-const addNewProject = document.querySelector('.addNewProject');
-console.log(addNewProject);
+
                                         //couleur du bouton à modifier, et rendre le bouton clicquable lorsque selectPhoto, projectCategory et projectName sont remplis
                                         //au clic envoyer une requete post à l'api works pour créer une nouvelle entrée
                                         // construction du Json pour l'envoi du nouveau projet
                                         // (à placer dans l'EventListener du bouton addNewProject)
 
-const nameValue = document.getElementById('projectName').value;
                                         //donnée à envoyer à l'API works en POST sous la ref "title"
 
-const imageSrc = document.getElementById('explore').value;
                                         //donnée à envoyer à l'API works en POST sous la ref "imageURL"
 
-const catValue = document.getElementById('projectCategory').value;
                                         //donnée à envoyer à l'API works en POST sous la ref "categoryId"
 
 const createProject = {

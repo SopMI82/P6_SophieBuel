@@ -430,7 +430,7 @@ textarea {
   font-size: 75px;
   line-height: 75px;
 }
-.createProject .selectPhoto #falseButton {
+.createProject .selectPhoto #btnAddPhoto {
   background-color: #CBD6DC;
   color: #1D6154;
   margin: 10px auto;
@@ -456,9 +456,12 @@ textarea {
   color: black;
 }
 .createProject .selectPhoto .prevNewProject {
+  display: none;
   width: auto;
+  margin: auto;
   height: 170px;
   position: absolute;
+  align-self: center;
   z-index: 2;
 }
 

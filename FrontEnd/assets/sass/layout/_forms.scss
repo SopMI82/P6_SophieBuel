@@ -46,7 +46,7 @@ textarea {
         * {
             margin: 0;
         }
-        
+
         #explore {
             position: absolute;
             width: 100%;
@@ -61,7 +61,7 @@ textarea {
             line-height: 75px;
         }
 
-        #falseButton {
+        #btnAddPhoto {
             background-color: $light-grey;
             color: $main-color;
             margin: 10px auto;
@@ -80,9 +80,12 @@ textarea {
         }
 
         .prevNewProject {
+            display: none;
             width: auto;
+            margin: auto;
             height: 170px;
             position: absolute;
+            align-self: center;
             z-index: 2;
         }
     }
