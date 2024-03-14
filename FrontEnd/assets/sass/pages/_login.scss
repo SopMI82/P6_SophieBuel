@@ -6,11 +6,17 @@
         text-align: center;
     }
 
-    #forgotten {
-        font: 500 1em $txt-main;
+    a {
+        text-decoration: none;
         text-decoration: underline;
-        border: none;
-        background-color: transparent;
+        font-weight: 500;
+        font-size: 1em;
+        color: $main-color_contrast;
+        text-align: center;
+
+        &:hover {
+            color: $main-color;
+        }
     }
 }
 

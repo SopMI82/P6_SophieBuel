@@ -296,7 +296,7 @@ function builtP2() {
 				<input type="text" name="title" id="projectName">
 				<label for="projectCategory">Catégorie :</label>
 				<select name="category" id="projectCategory">
-                    <option value="">Choisir une catégorie</option>            <!--Attention, insérer dynamiquement les <option></option> pour chaque categorie-->
+                    <option value="">Choisir une catégorie</option>        
 				<div class="lineDecor"></div>
 				<input class="addNewProject" type="submit" value="Valider">
 			</form>
@@ -351,45 +351,66 @@ function generateOptions(categories) {
 }
 
 function publishProject() {
-    const projectName = document.getElementById('projectName');
-    console.log(projectName);
-    const projectCategory = document.getElementById('projectCategory');
-    console.log(projectCategory);
     const addNewProject = document.querySelector('.addNewProject');
-    console.log(addNewProject);
 
     addNewProject.addEventListener('click', (event) => {
-        event.preventDefault()
-        // données à récolter pour envoyer à l'API :
-        const nameValue = document.getElementById('projectName').value;
-        const imageSrc = document.getElementById('explore').value;
-        const catValue = document.getElementById('projectCategory').value;
-        const projectId = parseInt(works.length) + 1;
-        //test :
-        console.log(projectId);
-        console.log(nameValue);
-        console.log(imageSrc);
-        console.log(catValue);
-        const createProject = {
-            title: document.getElementById('projectName').value,
-            imageUrl: document.getElementById('explore').value,
-            categoryId: document.getElementById('projectCategory').value,
-        };
-        console.log(createProject);
-        const chargeUtile = JSON.stringify(createProject)
-        fetch(`http://localhost:5678/api/works`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: chargeUtile
-        })
+        event.preventDefault();
+        sendForm();
     })
 }
 
+function sendForm() {
+    try {
+    const explore = document.getElementById('explore');
+    const catValue = document.getElementById('projectCategory').value;
+    const nameValue = document.getElementById('projectName').value;
+
+    const projectToAdd = new FormData();
+    projectToAdd.append("image", explore.files[0]);
+    projectToAdd.append("title", nameValue);
+    projectToAdd.append("category", catValue);
+
+    const postWork = fetch(`http://localhost:5678/api/works`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'accept': 'application/json',
+        },
+        body: projectToAdd,
+    })  
+        if (postWork.ok) {
+        alert ("Nouveau projet créé avec succès")
+    }      
+    } catch (error) {
+        console.log("une erreur est survenue, le fichier n'a pas été créé.");
+    }
+}
 
 //____________________________________________________BROUILLONS PAS ENCORE FONCTIONNELS_______________________________________________________________
+
+function checkSubmitProject() {
+try {
+        const baliseSelect = document.getElementById('projectCategory');
+        if (baliseSelect = "") {
+            throw new Error("Merci de sélectionner une catégorie.");
+        }
+    
+        const projectName = document.getElementById('projectName');
+        if (projectName = "") {
+            throw new Error("Merci de sélectionner une catégorie.");
+        }
+    
+    
+        const token = window.localStorage.getItem("token");
+        if (!token) {
+            throw new Error("Problème d'authentification : veuillez vous reconnecter.");
+        }
+} catch (error) {
+    
+}
+}
+
+
 
 /*
 

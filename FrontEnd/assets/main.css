@@ -371,9 +371,9 @@ footer nav ul {
 }
 
 form {
+  display: flex;
   text-align: left;
   margin-top: 30px;
-  display: flex;
   flex-direction: column;
 }
 
@@ -508,6 +508,10 @@ li:hover {
   display: flex;
 }
 
+section {
+  margin: 20px auto 20px auto;
+}
+
 #introduction {
   display: flex;
   align-items: center;
@@ -541,7 +545,7 @@ li:hover {
 
 #contact {
   width: 50%;
-  margin: auto;
+  margin: 20px auto 20px auto;
 }
 #contact * {
   text-align: center;
@@ -557,11 +561,16 @@ li:hover {
 #login h2 {
   text-align: center;
 }
-#login #forgotten {
-  font: 500 1em "Work Sans";
+#login a {
+  text-decoration: none;
   text-decoration: underline;
-  border: none;
-  background-color: transparent;
+  font-weight: 500;
+  font-size: 1em;
+  color: #0e2f28;
+  text-align: center;
+}
+#login a:hover {
+  color: #1D6154;
 }
 
 .errorBox {
