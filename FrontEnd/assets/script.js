@@ -13,6 +13,7 @@ async function getWorks() {
     const responseWorks = await fetch('http://localhost:5678/api/works')
     works = await responseWorks.json();
     console.log(works);
+
     return works;
 }
 
@@ -346,39 +347,45 @@ function generateOptions(categories) {
         console.log(baliseSelect);
         const catOption = `<option value="${category.id}">${category.name}</option>`;
         baliseSelect.insertAdjacentHTML('beforeend', catOption);
-        })
+    })
 }
 
 function publishProject() {
-const projectName = document.getElementById('projectName');
-console.log(projectName);    
-const projectCategory = document.getElementById('projectCategory');
-console.log(projectCategory);
-const addNewProject = document.querySelector('.addNewProject');
-console.log(addNewProject);
+    const projectName = document.getElementById('projectName');
+    console.log(projectName);
+    const projectCategory = document.getElementById('projectCategory');
+    console.log(projectCategory);
+    const addNewProject = document.querySelector('.addNewProject');
+    console.log(addNewProject);
 
-addNewProject.addEventListener('click', (event) => {
-    event.preventDefault()
-// données à récolter pour envoyer à l'API :
-    const nameValue = document.getElementById('projectName').value;
-    const imageSrc = document.getElementById('explore').value;
-    const catValue = document.getElementById('projectCategory').value;
-//test :
-    console.log(nameValue);
-    console.log(imageSrc);
-    console.log(catValue);    
-})
-
-
-    const createProject = {
-        id: works.lenght + 1,
-        title: document.getElementById('explore').value,
-        imageUrl: document.getElementById('explore').value,
-        categoryId: document.getElementById('projectCategory').value
-    };
-
-    console.log(createProject);
-
+    addNewProject.addEventListener('click', (event) => {
+        event.preventDefault()
+        // données à récolter pour envoyer à l'API :
+        const nameValue = document.getElementById('projectName').value;
+        const imageSrc = document.getElementById('explore').value;
+        const catValue = document.getElementById('projectCategory').value;
+        const projectId = parseInt(works.length) + 1;
+        //test :
+        console.log(projectId);
+        console.log(nameValue);
+        console.log(imageSrc);
+        console.log(catValue);
+        const createProject = {
+            title: document.getElementById('projectName').value,
+            imageUrl: document.getElementById('explore').value,
+            categoryId: document.getElementById('projectCategory').value,
+        };
+        console.log(createProject);
+        const chargeUtile = JSON.stringify(createProject)
+        fetch(`http://localhost:5678/api/works`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: chargeUtile
+        })
+    })
 }
 
 
