@@ -1,0 +1,26 @@
+#login {
+    width: 50%;
+    margin: 20vh auto;
+
+    h2 {
+        text-align: center;
+    }
+
+    a {
+        text-decoration: none;
+        text-decoration: underline;
+        font-weight: 500;
+        font-size: 1em;
+        color: $main-color_contrast;
+        text-align: center;
+
+        &:hover {
+            color: $main-color;
+        }
+    }
+}
+
+.errorBox {
+    font-size: 1.2rem;
+    color: red;
+}

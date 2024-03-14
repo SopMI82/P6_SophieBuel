@@ -1,7 +1,7 @@
 form {
+    display: flex;
     text-align: left;
     margin-top: 30px;
-    display: flex;
     flex-direction: column;
 }
 
@@ -9,9 +9,10 @@ label {
     margin: 2em 0 1em 0;
 }
 
-input {
+input, select {
     height: 50px;
     font-size: 1.2em;
+    font-family: $txt-main;
     @include inputOmbre;
 }
 
@@ -46,7 +47,7 @@ textarea {
         * {
             margin: 0;
         }
-        
+
         #explore {
             position: absolute;
             width: 100%;
@@ -61,7 +62,7 @@ textarea {
             line-height: 75px;
         }
 
-        #falseButton {
+        #btnAddPhoto {
             background-color: $light-grey;
             color: $main-color;
             margin: 10px auto;
@@ -80,9 +81,12 @@ textarea {
         }
 
         .prevNewProject {
+            display: none;
             width: auto;
+            margin: auto;
             height: 170px;
             position: absolute;
+            align-self: center;
             z-index: 2;
         }
     }

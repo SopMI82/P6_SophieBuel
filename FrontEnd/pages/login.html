@@ -10,19 +10,19 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
 		rel="stylesheet">
 	<meta name="description" content="">
-	<link rel="stylesheet" href="./main.css">
-	<script type="module" src="./login.js"></script>
+	<link rel="stylesheet" href="../sass/main.css">
 </head>
 
 <body>
+	<div class="mainContainer">
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
 			<ul>
 				<li>projets</li>
 				<li>contact</li>
-				<li><a href="/FrontEnd/index.html">logout</a></li>
-				<li><img src="/FrontEnd/assets/icons/instagram.png" alt="Instagram"></li>
+				<li><a href="../index.html">logout</a></li>
+				<li><img src="../assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
 	</header>
@@ -36,7 +36,7 @@
 				<label for="password">Mot de passe</label>
 				<input type="password" name="password" id="password">
 				<input type="submit" value="Se Connecter" id="btnConnect">
-				<button id="forgotten">Mot de passe oublié</button>
+				<a href="#" id="forgotten">Mot de passe oublié</a>
 			</form>
 		</section>
 	</main>
@@ -48,6 +48,8 @@
 			</ul>
 		</nav>
 	</footer>
+	</div>
+		<script src="../javascript/login.js" defer></script>
 </body>
 
 </html>
