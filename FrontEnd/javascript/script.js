@@ -64,8 +64,7 @@ function showAdminmode() {
         btnEdit.remove()
         logBtn.innerHTML = ""
         logBtn.insertAdjacentHTML("afterbegin", `
-        <a href="./assets/login.html" class="logIn">login</a>
-    `)
+            <a href="./pages/login.html" class="logIn">login</a>`)
     }
 }
 
