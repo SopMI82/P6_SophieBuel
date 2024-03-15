@@ -66,17 +66,17 @@ function genererApercu(works) {
             </figure>
         `);
     })
-        const btnTrash = document.querySelectorAll('.btnTrash');
-    
-        btnTrash.forEach(btnTrash => {
-            btnTrash.addEventListener('click', (event) => {
-                event.preventDefault();
-                let clickedProject = event.target.parentNode;
-                let projectId = clickedProject.id;
-                deleteWork(projectId);
-            })
-        });
-    };
+    const btnTrash = document.querySelectorAll('.btnTrash');
+
+    btnTrash.forEach(btnTrash => {
+        btnTrash.addEventListener('click', (event) => {
+            event.preventDefault();
+            let clickedProject = event.target.parentNode;
+            let projectId = clickedProject.id;
+            deleteWork(projectId);
+        })
+    });
+};
 
 /**
  * Fonction qui crée la structure de la deuxième page de la modale
@@ -122,12 +122,14 @@ function builtP2() {
 				<select name="category" id="projectCategory">
                     <option value="">Choisir une catégorie</option>        
 				<div class="lineDecor"></div>
-				<input class="addNewProject" type="submit" value="Valider">
+				<input class="addNewProject <--invalidForm-->" type="submit" value="Valider">
 			</form>
 		</div>
         `)
     showPreview()
     generateOptions(categories)
+    controlForm(); //doit renvoyer un message d'erreur si un élément manque
+    // ne devrait pas être ici, devrait être dans un listener change sur les inputs, pour pouvoir activer le bouton addnexproject
     publishProject()
 }
 
@@ -137,8 +139,6 @@ function builtP2() {
 function showPreview() {
     const explore = document.getElementById('explore');
     const prevNewProject = document.querySelector('.prevNewProject');
-    console.log(explore);
-    console.log(prevNewProject);
     explore.addEventListener('change', (event) => {
         if (event.target.files.length > 0) {
             prevNewProject.src = URL.createObjectURL(event.target.files[0]);
@@ -154,7 +154,6 @@ function showPreview() {
 function generateOptions(categories) {
     categories.forEach(category => {
         const baliseSelect = document.getElementById('projectCategory');
-        console.log(baliseSelect);
         const catOption = `<option value="${category.id}">${category.name}</option>`;
         baliseSelect.insertAdjacentHTML('beforeend', catOption);
     })

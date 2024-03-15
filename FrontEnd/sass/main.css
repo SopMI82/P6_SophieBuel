@@ -352,6 +352,13 @@ input[type=submit] {
 input[type=submit]:hover {
   background-color: #0e2f28;
 }
+input[type=submit].invalidForm {
+  background-color: #B3B3B3;
+  cursor: not-allowed;
+}
+input[type=submit].invalidForm:hover {
+  background-color: #B3B3B3;
+}
 
 .lineDecor {
   border: 1px solid #B3B3B3;

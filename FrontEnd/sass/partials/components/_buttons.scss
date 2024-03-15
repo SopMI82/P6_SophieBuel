@@ -1,5 +1,5 @@
 #filters {
-    
+
     button {
         @include btnRounded;
         font: 700 1rem Syne;
@@ -19,7 +19,8 @@
 input {
     height: 50px;
     font-size: 1.2em;
-    @include inputOmbre;}
+    @include inputOmbre;
+}
 
 input[type="submit"] {
     @include btnRounded;
@@ -30,6 +31,15 @@ input[type="submit"] {
     &:hover {
         background-color: $main-color_contrast;
     }
+
+    &.invalidForm {
+        background-color: $dark-grey;
+        cursor: not-allowed;
+
+        &:hover {
+            background-color: $dark-grey;
+        }
+    }
 }
 
 .lineDecor {
@@ -38,7 +48,7 @@ input[type="submit"] {
     margin: 20px 0;
 }
 
-.btnTrash{
+.btnTrash {
     border: none;
     background-color: transparent;
 }
