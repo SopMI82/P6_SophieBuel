@@ -36,8 +36,22 @@ function deleteWork(projectId) {
             'Authorization': `Bearer ${token}`
         }
     })
+    window.location.reload()
 }
 
 /**
  * Créer un projet dans l'API
  */
+function sendForm() {
+    const token = window.localStorage.getItem("token");
+
+    fetch(`http://localhost:5678/api/works`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'accept': 'application/json',
+        },
+        body: projectToAdd,
+    })
+    window.location.reload()
+}

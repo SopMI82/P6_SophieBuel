@@ -385,7 +385,8 @@ label {
   margin: 2em 0 1em 0;
 }
 
-input, select {
+input,
+select {
   height: 50px;
   font-size: 1.2em;
   font-family: "Work Sans";
@@ -394,6 +395,8 @@ input, select {
 }
 
 textarea {
+  font-size: 1.2em;
+  font-family: "Work Sans";
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
@@ -552,10 +555,13 @@ section {
   width: 50%;
   margin: 20px auto 20px auto;
 }
-#contact * {
+#contact h2,
+#contact p {
   text-align: center;
 }
-#contact label {
+#contact label,
+#contact input,
+#contact textarea {
   text-align: left;
 }
 
@@ -579,8 +585,10 @@ section {
 }
 
 .errorBox {
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: red;
+  text-align: center;
+  padding-top: 20px;
 }
 
 .edit {

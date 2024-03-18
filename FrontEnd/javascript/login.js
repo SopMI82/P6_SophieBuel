@@ -25,10 +25,10 @@ btnConnect.addEventListener("click", (event) => {
                 console.log(localStorage);
                 window.location.href = "../index.html";
             }
+            else {
+                errorBox.insertAdjacentHTML('beforeend', "<p>Email ou mot de passe incorrect</p>")
+            }
         })
-        .catch(error => {
-            errorBox.insertAdjacentHTML('beforeend', "<p>Email ou mot de passe incorrect</p>")
-        });
 })
 
 

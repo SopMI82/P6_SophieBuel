@@ -9,7 +9,8 @@ label {
     margin: 2em 0 1em 0;
 }
 
-input, select {
+input,
+select {
     height: 50px;
     font-size: 1.2em;
     font-family: $txt-main;
@@ -17,6 +18,8 @@ input, select {
 }
 
 textarea {
+    font-size: 1.2em;
+    font-family: $txt-main;
     @include inputOmbre;
 }
 

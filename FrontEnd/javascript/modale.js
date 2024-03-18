@@ -168,3 +168,76 @@ function returnPrevious(event) {
         generatePage1();
     })
 }
+
+/**
+ * Vérifie que le formulaire est correctement rempli et construit le projectToAdd
+ */
+function controlForm() {
+    try {
+        const explore = document.getElementById('explore');
+        const inputProject = document.getElementById('projectName');
+        const baliseSelect = document.getElementById('projectCategory');
+
+        explore.addEventListener('change', () => {
+            const photo = document.getElementById('explore').value;
+            if (!photo) {
+                throw new Error("Merci de sélectionner une image.");
+            }
+            projectToAdd.append("image", explore.files[0]);
+            enableAdd()
+        })
+
+        inputProject.addEventListener('change', () => {
+            const projectName = document.getElementById('projectName').value;
+            if (!projectName) {
+                throw new Error("Merci de renseigner le nom du projet.");
+            }
+            projectToAdd.append("title", projectName);
+            enableAdd()
+        })
+
+        baliseSelect.addEventListener('change', () => {
+            const category = document.getElementById('projectCategory').value;
+            if (!category) {
+                throw new Error("Merci de sélectionner une catégorie.");
+            }
+            projectToAdd.append("category", category);
+            enableAdd()
+        })
+
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+/**
+ * Fonction qui active le bouton de soumission du formulaire
+ */
+function enableAdd() {
+    const btn = document.getElementById('addNewProject');
+    const category = projectToAdd.get('category');
+    const title = projectToAdd.get('title');
+    const image = projectToAdd.get('image');
+
+    if (!!category & !!title & !!image) {
+        btn.removeAttribute('disabled')
+    }
+}
+
+const projectToAdd = new FormData();
+/**
+ * Fonction chargée de publier le nouveau projet
+ */
+function publishProject() {
+    const addNewProject = document.querySelector('.addNewProject');
+
+    addNewProject.addEventListener('click', (event) => {
+        event.preventDefault();
+        sendForm(); //si tout est ok, envoie les données, et affiche un message de confirmation
+    })
+}
+
+
+
+
+
