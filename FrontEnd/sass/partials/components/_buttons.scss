@@ -32,13 +32,9 @@ input[type="submit"] {
         background-color: $main-color_contrast;
     }
 
-    &.invalidForm {
+    &:disabled {
         background-color: $dark-grey;
         cursor: not-allowed;
-
-        &:hover {
-            background-color: $dark-grey;
-        }
     }
 }
 

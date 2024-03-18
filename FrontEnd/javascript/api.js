@@ -20,7 +20,6 @@ async function getWorks() {
     const responseWorks = await fetch('http://localhost:5678/api/works')
     works = await responseWorks.json();
     console.log(works);
-
     return works;
 }
 
@@ -37,9 +36,6 @@ function deleteWork(projectId) {
             'Authorization': `Bearer ${token}`
         }
     })
-        .then(() => {
-            genererApercu(works);
-        })
 }
 
 /**

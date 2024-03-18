@@ -62,20 +62,10 @@ function genererApercu(works) {
         miniGallery.insertAdjacentHTML('beforeend', `
             <figure>
                 <img src="${work.imageUrl}">
-                <button onClick="removeProject()" class="btnTrash" id="${work.id}"><i class="fa-regular fa-trash-can"></i></button>
+                <button onClick="deleteWork(${work.id})" class="btnTrash" id="${work.id}"><i class="fa-regular fa-trash-can"></i></button>
             </figure>
         `);
     })
-    const btnTrash = document.querySelectorAll('.btnTrash');
-
-    btnTrash.forEach(btnTrash => {
-        btnTrash.addEventListener('click', (event) => {
-            event.preventDefault();
-            let clickedProject = event.target.parentNode;
-            let projectId = clickedProject.id;
-            deleteWork(projectId);
-        })
-    });
 };
 
 /**
@@ -95,7 +85,7 @@ function generatePage2(event) {
  * Fonction qui crée le contenu de la deuxième page de la modale
  */
 function builtP2() {
-    const popupContent = document.querySelector('.popupContent')
+    const popupContent = document.querySelector('.popupContent');
     popupContent.innerHTML = "";
     popupContent.insertAdjacentHTML("beforeend", `
         <div class="popupNav">
@@ -122,15 +112,14 @@ function builtP2() {
 				<select name="category" id="projectCategory">
                     <option value="">Choisir une catégorie</option>        
 				<div class="lineDecor"></div>
-				<input class="addNewProject <--invalidForm-->" type="submit" value="Valider">
+				<input class="addNewProject" id="addNewProject" type="submit" value="Valider" disabled>
 			</form>
 		</div>
-        `)
-    showPreview()
-    generateOptions(categories)
-    controlForm(); //doit renvoyer un message d'erreur si un élément manque
-    // ne devrait pas être ici, devrait être dans un listener change sur les inputs, pour pouvoir activer le bouton addnexproject
-    publishProject()
+        `);
+    showPreview();
+    generateOptions(categories);
+    controlForm();
+    publishProject();
 }
 
 /**
@@ -163,8 +152,8 @@ function generateOptions(categories) {
  * fonction qui gère le clic sur la croix pour la fermeture de la modale
  */
 function closeModal(event) {
-    const closePopup = document.querySelector('.closePopup')
-    const popup = document.querySelector('.popup')
+    const closePopup = document.querySelector('.closePopup');
+    const popup = document.querySelector('.popup');
     closePopup.addEventListener("click", () => {
         popup.remove()
     })
