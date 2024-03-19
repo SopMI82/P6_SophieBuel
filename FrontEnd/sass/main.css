@@ -207,9 +207,9 @@ p {
   width: 630px;
   height: 690px;
   display: flex;
+  position: relative;
   box-sizing: border-box;
   padding: 25px;
-  gap: 25px;
   align-items: center;
   background-color: white;
   flex-direction: column;
@@ -229,47 +229,58 @@ p {
   display: flex;
   flex-direction: column;
 }
-
-.miniGallery {
+.page-one .miniGallery {
   display: grid;
+  max-height: 430px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;
   row-gap: 24px;
   -moz-column-gap: 8px;
        column-gap: 8px;
+  overflow-y: auto;
 }
-.miniGallery figure {
-  width: 100%;
+.page-one .miniGallery figure {
+  width: 98%;
+  height: 100px;
   display: flex;
   position: relative;
   animation: name duration timing-function delay iteration-count direction fill-mode;
 }
-.miniGallery figure img {
+.page-one .miniGallery figure img {
   display: flex;
   width: 100%;
+  height: 105px;
+  -o-object-fit: cover;
+     object-fit: cover;
   transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   -ms-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
 }
-.miniGallery figure img:hover {
+.page-one .miniGallery figure img:hover {
   transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   -ms-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
-  transform: scale(1.1);
-  -webkit-transform: scale(1.1);
-  -moz-transform: scale(1.1);
-  -ms-transform: scale(1.1);
-  -o-transform: scale(1.1);
+  transform: scale(1.05);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
 }
-.miniGallery figure i {
-  display: flex;
+
+.btnTrash {
+  padding: 0;
+  border: none;
+  background-color: transparent;
   position: absolute;
   right: 4px;
   top: 4px;
+}
+.btnTrash i {
+  display: flex;
   padding: 4px;
   border-radius: 2px;
   font-size: 0.6rem;
@@ -286,7 +297,7 @@ p {
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
 }
-.miniGallery figure i:hover {
+.btnTrash i:hover {
   transition: all 0.3s ease-in-out;
   background-color: white;
   color: black;
@@ -294,6 +305,17 @@ p {
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
+}
+
+.lineDecor {
+  display: flex;
+  position: absolute;
+  bottom: 0px;
+  border-top: 1px solid #B3B3B3;
+  background-color: white;
+  width: 420px;
+  margin-top: 25px;
+  justify-content: center;
 }
 
 .page-two {
@@ -357,32 +379,34 @@ input[type=submit]:disabled {
   cursor: not-allowed;
 }
 
-.lineDecor {
-  border: 1px solid #B3B3B3;
+footer {
   width: 100%;
-  margin: 20px 0;
+  display: block;
+  position: static;
+  bottom: 0px;
+  right: 0px;
+  height: 60px;
+  background-color: white;
 }
-
-.btnTrash {
-  border: none;
-  background-color: transparent;
-}
-
 footer nav ul {
   display: flex;
   justify-content: flex-end;
-  margin: 2em;
+  line-height: 60px;
+}
+footer nav ul li {
+  padding-right: 110px;
 }
 
 form {
   display: flex;
+  width: 380px;
+  margin: auto;
   text-align: left;
-  margin-top: 30px;
   flex-direction: column;
 }
 
 label {
-  margin: 2em 0 1em 0;
+  margin: 2em 0 0.5em 0;
 }
 
 input,
@@ -481,13 +505,16 @@ textarea {
   grid-row-gap: 20px;
 }
 .gallery img {
-  width: 100%;
+  width: 310px;
+  height: 410px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 header {
   display: flex;
   justify-content: space-between;
-  margin: 50px 0;
+  padding: 50px 150px;
 }
 
 ul {
@@ -502,10 +529,18 @@ li {
 li a {
   text-decoration: none;
   color: #0e2f28;
+  font-size: 1.1em;
+  line-height: 22px;
 }
 li a:hover {
   color: #B1663C;
   cursor: pointer;
+}
+li a img {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  vertical-align: bottom;
 }
 li:hover {
   color: #B1663C;
@@ -517,31 +552,37 @@ li:hover {
 }
 
 section {
-  margin: 20px auto 20px auto;
+  margin: auto;
+  width: 950px;
 }
 
 #introduction {
+  padding: 90px 0 90px 0;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 #introduction figure {
-  flex: 1;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 #introduction img {
   display: block;
   margin: auto;
-  width: 80%;
+  width: 475px;
 }
 #introduction article {
-  flex: 1;
+  width: 400px;
+  height: auto;
 }
 
 #portfolio {
-  width: 100%;
+  padding: 50px 0 50px 0;
   box-sizing: border-box;
 }
 #portfolio h2 {
   text-align: center;
+  margin-bottom: 90px;
 }
 #portfolio #filters {
   width: 100%;
@@ -552,8 +593,7 @@ section {
 }
 
 #contact {
-  width: 50%;
-  margin: 20px auto 20px auto;
+  width: 100%;
 }
 #contact h2,
 #contact p {
@@ -629,10 +669,6 @@ body {
   font-family: "Work Sans";
   font-size: 0.9rem;
   background-color: #fffef8;
-}
-
-section {
-  margin: 50px 0;
 }
 
 .masked {

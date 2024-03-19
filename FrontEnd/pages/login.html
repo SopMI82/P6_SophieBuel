@@ -14,7 +14,6 @@
 </head>
 
 <body>
-	<div class="mainContainer">
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
@@ -26,21 +25,23 @@
 			</ul>
 		</nav>
 	</header>
-	<main>
-		<section id="login">
-			<h2>Log In</h2>
-			<form action="#" method="post">
-				<label for="email">Email</label>
-				<input type="email" name="email" id="email">
-				<label for="password">Mot de passe</label>
-				<input type="password" name="password" id="password">
-				<div class="errorBox"></div>
-				<input type="submit" value="Se Connecter" id="btnConnect">
-				<a href="#" id="forgotten">Mot de passe oublié</a>
-			</form>
-		</section>
-	</main>
+	<div class="mainContainer">
 
+		<main>
+			<section id="login">
+				<h2>Log In</h2>
+				<form action="#" method="post">
+					<label for="email">Email</label>
+					<input type="email" name="email" id="email">
+					<label for="password">Mot de passe</label>
+					<input type="password" name="password" id="password">
+					<div class="errorBox"></div>
+					<input type="submit" value="Se Connecter" id="btnConnect">
+					<a href="#" id="forgotten">Mot de passe oublié</a>
+				</form>
+			</section>
+		</main>
+	</div>
 	<footer>
 		<nav>
 			<ul>
@@ -48,8 +49,8 @@
 			</ul>
 		</nav>
 	</footer>
-	</div>
-		<script src="../javascript/login.js" defer></script>
+
+	<script src="../javascript/login.js" defer></script>
 </body>
 
 </html>

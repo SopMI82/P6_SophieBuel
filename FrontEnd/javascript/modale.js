@@ -44,8 +44,9 @@ function builtP1() {
         <div class="page-one">
             <h3>Galerie photo</h3>
             <div class="miniGallery"></div>
-            <div class="lineDecor"></div>
-            <input type="submit" class="newProject" value="Ajouter une photo">
+            <div class="lineDecor">
+                <input type="submit" class="newProject" value="Ajouter une photo">
+            </div>
         </div>
     `)
 }
@@ -110,10 +111,12 @@ function builtP2() {
 				<input type="text" name="title" id="projectName">
 				<label for="projectCategory">Catégorie :</label>
 				<select name="category" id="projectCategory">
-                    <option value="">Choisir une catégorie</option>        
-				<div class="lineDecor"></div>
-				<input class="addNewProject" id="addNewProject" type="submit" value="Valider" disabled>
-			</form>
+                    <option value="">Choisir une catégorie</option> 
+                </select>
+				<div class="lineDecor">
+                    <input class="addNewProject" id="addNewProject" type="submit" value="Valider" disabled>
+		        </div>
+            </form>
 		</div>
         `);
     showPreview();

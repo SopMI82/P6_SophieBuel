@@ -1,32 +1,37 @@
 section {
-    margin: 20px auto 20px auto;
+    margin: auto;
+    width: 950px;
 }
 
 #introduction {
+    padding: 90px 0 90px 0;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
     figure {
-        flex: 1;
+        width: fit-content;
     }
 
     img {
         display: block;
         margin: auto;
-        width: 80%;
+        width: 475px;
     }
 
     article {
-        flex: 1
+        width: 400px;
+        height: auto;
     }
 }
 
 #portfolio {
-    width: 100%;
+    padding: 50px 0 50px 0;
     box-sizing: border-box;
 
     h2 {
         text-align: center;
+        margin-bottom: 90px;
     }
 
     #filters {
@@ -40,8 +45,7 @@ section {
 }
 
 #contact {
-    width: 50%;
-    margin: 20px auto 20px auto;
+    width: 100%;
 
     h2,
     p {
@@ -52,5 +56,6 @@ section {
     input,
     textarea {
         text-align: left;
+
     }
 }
