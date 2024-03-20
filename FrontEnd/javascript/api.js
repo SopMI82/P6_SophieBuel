@@ -53,5 +53,6 @@ function sendForm() {
         },
         body: projectToAdd,
     })
+    console.log(projectToAdd);
     window.location.reload()
 }
