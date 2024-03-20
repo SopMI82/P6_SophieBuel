@@ -374,10 +374,6 @@ input[type=submit] {
 input[type=submit]:hover {
   background-color: #0e2f28;
 }
-input[type=submit]:disabled {
-  background-color: #B3B3B3;
-  cursor: not-allowed;
-}
 
 footer {
   width: 100%;

@@ -1,5 +1,4 @@
 #filters {
-
     button {
         @include btnRounded;
         font: 700 1rem Syne;
@@ -31,12 +30,4 @@ input[type="submit"] {
     &:hover {
         background-color: $main-color_contrast;
     }
-
-    &:disabled {
-        background-color: $dark-grey;
-        cursor: not-allowed;
-    }
 }
-
-
-
