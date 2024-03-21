@@ -1,5 +1,4 @@
 #filters {
-    
     button {
         @include btnRounded;
         font: 700 1rem Syne;
@@ -19,7 +18,8 @@
 input {
     height: 50px;
     font-size: 1.2em;
-    @include inputOmbre;}
+    @include inputOmbre;
+}
 
 input[type="submit"] {
     @include btnRounded;
@@ -30,15 +30,4 @@ input[type="submit"] {
     &:hover {
         background-color: $main-color_contrast;
     }
-}
-
-.lineDecor {
-    border: 1px solid $dark-grey;
-    width: 100%;
-    margin: 20px 0;
-}
-
-.btnTrash{
-    border: none;
-    background-color: transparent;
 }

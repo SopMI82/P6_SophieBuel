@@ -44,16 +44,23 @@ function displayAdminBanner() {
  */
 function showAdminmode() {
 
-    const token = window.localStorage.getItem("token");
+    const token = window.sessionStorage.getItem("token");
     const logBtn = document.querySelector('.logBtn');
     const adminBanner = document.querySelector('.adminBanner');
     const btnEdit = document.getElementById('edit');
+    console.log("test4");
+    console.log(token);
+
 
     if (token !== null) {
+        logBtn.innerHTML = "";
         logBtn.insertAdjacentHTML("afterbegin", displayLogout());
+        console.log("test5");
+
         adminBanner.insertAdjacentHTML("afterbegin", displayAdminBanner());
         btnEdit.insertAdjacentHTML("afterbegin", displayEditModal());
         filters.style.display = "none";
+        console.log("test");
         eraseToken();
 
     } else {
@@ -74,7 +81,7 @@ function eraseToken(token) {
     const logOut = document.querySelector('.logOut');
     console.log(logOut);
     logOut.addEventListener("click", () => {
-        window.localStorage.removeItem("token");
+        window.sessionStorage.removeItem("token");
         showAdminmode(token);
     })
 }
@@ -111,3 +118,34 @@ function generateBtn(categories) {
     })
 }
 
+/**
+ * Vérifie que le formulaire de contact est correctement rempli et construit le message
+ */
+function checkContact() {
+    const form = document.getElementById('formContact');
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const contactName = document.getElementById('name');
+        const email = document.getElementById('email');
+        const message = document.getElementById('message');
+        console.log(contactName.value, email.value, message.value);
+        if (!contactName.value) {
+            contactName.style.border = "2px solid red"
+        }
+        else if (!email.value) {
+            email.style.border = "2px solid red"
+        }
+        else if (!message.value) {
+            message.style.border = "2px solid red"
+        }
+        else {
+            let mailto =
+                `mailto:sophie.bluel@test.tld
+        ?subject=${contactName.value} aimerait vous contacter
+        &body= Merci de répondre sur cette adresse :%0D%0A${email.value} %0D%0A %0D%0AContenu du message :%0D%0A${message.value}`
+            location.href = mailto
+            form.reset();
+        }
+    })
+}

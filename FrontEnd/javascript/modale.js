@@ -44,8 +44,9 @@ function builtP1() {
         <div class="page-one">
             <h3>Galerie photo</h3>
             <div class="miniGallery"></div>
-            <div class="lineDecor"></div>
-            <input type="submit" class="newProject" value="Ajouter une photo">
+            <div class="lineDecor">
+                <input type="submit" class="newProject" value="Ajouter une photo">
+            </div>
         </div>
     `)
 }
@@ -62,21 +63,11 @@ function genererApercu(works) {
         miniGallery.insertAdjacentHTML('beforeend', `
             <figure>
                 <img src="${work.imageUrl}">
-                <button onClick="removeProject()" class="btnTrash" id="${work.id}"><i class="fa-regular fa-trash-can"></i></button>
+                <button onClick="deleteWork(${work.id})" class="btnTrash" id="${work.id}"><i class="fa-regular fa-trash-can"></i></button>
             </figure>
         `);
     })
-        const btnTrash = document.querySelectorAll('.btnTrash');
-    
-        btnTrash.forEach(btnTrash => {
-            btnTrash.addEventListener('click', (event) => {
-                event.preventDefault();
-                let clickedProject = event.target.parentNode;
-                let projectId = clickedProject.id;
-                deleteWork(projectId);
-            })
-        });
-    };
+};
 
 /**
  * Fonction qui crée la structure de la deuxième page de la modale
@@ -95,7 +86,7 @@ function generatePage2(event) {
  * Fonction qui crée le contenu de la deuxième page de la modale
  */
 function builtP2() {
-    const popupContent = document.querySelector('.popupContent')
+    const popupContent = document.querySelector('.popupContent');
     popupContent.innerHTML = "";
     popupContent.insertAdjacentHTML("beforeend", `
         <div class="popupNav">
@@ -111,7 +102,7 @@ function builtP2() {
 			<form action="" class="createProject">
 				<div class="selectPhoto">
 					<label for="explore"><i class="fa-regular fa-image"></i></label>
-					<input id="explore" type="file" accept=".png,.jpeg,.jpeg">
+					<input id="explore" type="file" accept=".png,.jpeg,.jpg">
                     <div id="btnAddPhoto">+ Ajouter photo</div>
 					<p>jpg, png : 4mo max</p>
                     <img class="prevNewProject" src="#">
@@ -120,15 +111,18 @@ function builtP2() {
 				<input type="text" name="title" id="projectName">
 				<label for="projectCategory">Catégorie :</label>
 				<select name="category" id="projectCategory">
-                    <option value="">Choisir une catégorie</option>        
-				<div class="lineDecor"></div>
-				<input class="addNewProject" type="submit" value="Valider">
-			</form>
+                    <option value="">Choisir une catégorie</option> 
+                </select>
+				<div class="lineDecor">
+                    <input class="addNewProject" id="addNewProject" type="submit" value="Valider" disabled>
+		        </div>
+            </form>
 		</div>
-        `)
-    showPreview()
-    generateOptions(categories)
-    publishProject()
+        `);
+    showPreview();
+    generateOptions(categories);
+    controlForm();
+    publishProject();
 }
 
 /**
@@ -137,8 +131,6 @@ function builtP2() {
 function showPreview() {
     const explore = document.getElementById('explore');
     const prevNewProject = document.querySelector('.prevNewProject');
-    console.log(explore);
-    console.log(prevNewProject);
     explore.addEventListener('change', (event) => {
         if (event.target.files.length > 0) {
             prevNewProject.src = URL.createObjectURL(event.target.files[0]);
@@ -154,7 +146,6 @@ function showPreview() {
 function generateOptions(categories) {
     categories.forEach(category => {
         const baliseSelect = document.getElementById('projectCategory');
-        console.log(baliseSelect);
         const catOption = `<option value="${category.id}">${category.name}</option>`;
         baliseSelect.insertAdjacentHTML('beforeend', catOption);
     })
@@ -164,8 +155,8 @@ function generateOptions(categories) {
  * fonction qui gère le clic sur la croix pour la fermeture de la modale
  */
 function closeModal(event) {
-    const closePopup = document.querySelector('.closePopup')
-    const popup = document.querySelector('.popup')
+    const closePopup = document.querySelector('.closePopup');
+    const popup = document.querySelector('.popup');
     closePopup.addEventListener("click", () => {
         popup.remove()
     })
@@ -180,3 +171,78 @@ function returnPrevious(event) {
         generatePage1();
     })
 }
+
+/**
+ * Vérifie que le formulaire est correctement rempli et construit le projectToAdd
+ */
+function controlForm() {
+    try {
+        const explore = document.getElementById('explore');
+        const inputProject = document.getElementById('projectName');
+        const baliseSelect = document.getElementById('projectCategory');
+
+        explore.addEventListener('change', () => {
+            const photo = document.getElementById('explore').value;
+            if (!photo) {
+                throw new Error("Merci de sélectionner une image.");
+            }
+            projectToAdd.append("image", explore.files[0]);
+            enableAdd()
+        })
+
+        inputProject.addEventListener('change', () => {
+            const projectName = document.getElementById('projectName').value;
+            if (!projectName) {
+                throw new Error("Merci de renseigner le nom du projet.");
+            }
+            projectToAdd.append("title", projectName);
+            enableAdd()
+        })
+
+        baliseSelect.addEventListener('change', () => {
+            const category = document.getElementById('projectCategory').value;
+            if (!category) {
+                throw new Error("Merci de sélectionner une catégorie.");
+            }
+            projectToAdd.append("category", category);
+            enableAdd()
+        })
+
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+/**
+ * Fonction qui active le bouton de soumission du formulaire
+ */
+function enableAdd() {
+    const btn = document.getElementById('addNewProject');
+    const category = projectToAdd.get('category');
+    const title = projectToAdd.get('title');
+    const image = projectToAdd.get('image');
+
+    if (!!category & !!title & !!image) {
+        btn.removeAttribute('disabled')
+    }
+}
+
+const projectToAdd = new FormData();
+/**
+ * Fonction chargée de publier le nouveau projet
+ */
+function publishProject() {
+    const addNewProject = document.querySelector('.addNewProject');
+
+    addNewProject.addEventListener('click', (event) => {
+        event.preventDefault();
+        sendForm(); //si tout est ok, envoie les données, et affiche un message de confirmation
+        
+    })
+    
+}
+
+
+
+
+

@@ -20,7 +20,6 @@ async function getWorks() {
     const responseWorks = await fetch('http://localhost:5678/api/works')
     works = await responseWorks.json();
     console.log(works);
-
     return works;
 }
 
@@ -29,7 +28,7 @@ async function getWorks() {
  * @param {*} projectId 
  */
 function deleteWork(projectId) {
-    const token = window.localStorage.getItem("token");
+    const token = window.sessionStorage.getItem("token");
     fetch(`http://localhost:5678/api/works/${projectId}`, {
         method: 'DELETE',
         headers: {
@@ -37,11 +36,22 @@ function deleteWork(projectId) {
             'Authorization': `Bearer ${token}`
         }
     })
-        .then(() => {
-            genererApercu(works);
-        })
+    window.location.reload()
 }
 
 /**
  * Créer un projet dans l'API
  */
+function sendForm() {
+    const token = window.sessionStorage.getItem("token");
+
+    fetch(`http://localhost:5678/api/works`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'accept': 'application/json'
+        },
+        body: projectToAdd,
+    })
+    console.log(projectToAdd);
+}

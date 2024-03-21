@@ -16,20 +16,22 @@
 
 <body>
   <div class="adminBanner"></div>
+  <header>
+    <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+    <nav>
+      <ul>
+        <li><a href="#portfolio">projets</a></li>
+        <li><a href="#contact">contact</a></li>
+        <li class="logBtn"></li>
+
+        <li>
+          <a href=""><img src="./assets/icons/instagram.png" alt="Instagram" /></a>
+        </li>
+      </ul>
+    </nav>
+  </header>
   <div class="mainContainer">
-    <header>
-      <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-      <nav>
-        <ul>
-          <li><a href="#portfolio">projets</a></li>
-          <li><a href="#contact">contact</a></li>
-          <li class="logBtn"></li>
 
-
-          <li><a href=""><img src="./assets/icons/instagram.png" alt="Instagram" /></a></li>
-        </ul>
-      </nav>
-    </header>
     <main>
       <section id="introduction">
         <figure>
@@ -64,7 +66,7 @@
       <section id="contact">
         <h2>Contact</h2>
         <p>Vous avez un projet ? Discutons-en !</p>
-        <form action="#" method="post">
+        <form action="#" method="post" id="formContact">
           <label for="name">Nom</label>
           <input type="text" name="name" id="name" />
           <label for="email">Email</label>
@@ -75,15 +77,15 @@
         </form>
       </section>
     </main>
-
-    <footer>
-      <nav>
-        <ul>
-          <li>Mentions Légales</li>
-        </ul>
-      </nav>
-    </footer>
   </div>
+  <footer>
+    <nav>
+      <ul>
+        <li>Mentions Légales</li>
+      </ul>
+    </nav>
+  </footer>
+
   <script src="./javascript/api.js" defer></script>
   <script src="./javascript/fonctions.js" defer></script>
   <script src="./javascript/modale.js" defer></script>

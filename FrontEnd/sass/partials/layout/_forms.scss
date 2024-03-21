@@ -1,15 +1,17 @@
 form {
     display: flex;
+    width: 380px;
+    margin: auto;
     text-align: left;
-    margin-top: 30px;
     flex-direction: column;
 }
 
 label {
-    margin: 2em 0 1em 0;
+    margin: 2em 0 0.5em 0;
 }
 
-input, select {
+input,
+select {
     height: 50px;
     font-size: 1.2em;
     font-family: $txt-main;
@@ -17,6 +19,8 @@ input, select {
 }
 
 textarea {
+    font-size: 1.2em;
+    font-family: $txt-main;
     @include inputOmbre;
 }
 
@@ -25,7 +29,6 @@ textarea {
     flex-direction: column;
     width: 420px;
     margin: auto;
-
 
     .selectPhoto {
         display: flex;
@@ -55,7 +58,6 @@ textarea {
             opacity: 0;
             z-index: 1;
         }
-
 
         .fa-image {
             font-size: 75px;
@@ -90,5 +92,4 @@ textarea {
             z-index: 2;
         }
     }
-
 }

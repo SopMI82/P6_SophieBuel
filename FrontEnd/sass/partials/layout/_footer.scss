@@ -1,5 +1,20 @@
-footer nav ul {
-    display: flex;
-    justify-content: flex-end;
-    margin: 2em
+footer {
+    width: 100%;
+    display: block;
+    position: static;
+    bottom: 0px;
+  right: 0px;
+    height: 60px;
+    background-color: $white;
+
+    nav ul {
+        display: flex;
+        justify-content: flex-end;
+        line-height: 60px;
+
+        li {
+            padding-right: 110px;
+        }
+
+    }
 }
