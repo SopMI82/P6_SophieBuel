@@ -28,7 +28,7 @@ async function getWorks() {
  * @param {*} projectId 
  */
 function deleteWork(projectId) {
-    const token = window.localStorage.getItem("token");
+    const token = window.sessionStorage.getItem("token");
     fetch(`http://localhost:5678/api/works/${projectId}`, {
         method: 'DELETE',
         headers: {
@@ -43,7 +43,7 @@ function deleteWork(projectId) {
  * Créer un projet dans l'API
  */
 function sendForm() {
-    const token = window.localStorage.getItem("token");
+    const token = window.sessionStorage.getItem("token");
 
     fetch(`http://localhost:5678/api/works`, {
         method: 'POST',

@@ -21,8 +21,8 @@ btnConnect.addEventListener("click", (event) => {
             console.log(data)
             if (data.token) {
                 const token = data.token
-                localStorage.setItem('token', token)
-                console.log(localStorage);
+                sessionStorage.setItem('token', token)
+                console.log(sessionStorage);
                 window.location.href = "../index.html";
             }
             else {

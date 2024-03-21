@@ -44,16 +44,23 @@ function displayAdminBanner() {
  */
 function showAdminmode() {
 
-    const token = window.localStorage.getItem("token");
+    const token = window.sessionStorage.getItem("token");
     const logBtn = document.querySelector('.logBtn');
     const adminBanner = document.querySelector('.adminBanner');
     const btnEdit = document.getElementById('edit');
+    console.log("test4");
+    console.log(token);
+
 
     if (token !== null) {
+        logBtn.innerHTML = "";
         logBtn.insertAdjacentHTML("afterbegin", displayLogout());
+        console.log("test5");
+
         adminBanner.insertAdjacentHTML("afterbegin", displayAdminBanner());
         btnEdit.insertAdjacentHTML("afterbegin", displayEditModal());
         filters.style.display = "none";
+        console.log("test");
         eraseToken();
 
     } else {
@@ -74,7 +81,7 @@ function eraseToken(token) {
     const logOut = document.querySelector('.logOut');
     console.log(logOut);
     logOut.addEventListener("click", () => {
-        window.localStorage.removeItem("token");
+        window.sessionStorage.removeItem("token");
         showAdminmode(token);
     })
 }
