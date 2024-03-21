@@ -237,7 +237,9 @@ function publishProject() {
     addNewProject.addEventListener('click', (event) => {
         event.preventDefault();
         sendForm(); //si tout est ok, envoie les données, et affiche un message de confirmation
+        
     })
+    
 }
 
 

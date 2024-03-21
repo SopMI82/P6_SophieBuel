@@ -244,7 +244,6 @@ p {
   height: 100px;
   display: flex;
   position: relative;
-  animation: name duration timing-function delay iteration-count direction fill-mode;
 }
 .page-one .miniGallery figure img {
   display: flex;
