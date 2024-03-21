@@ -102,7 +102,7 @@ function builtP2() {
 			<form action="" class="createProject">
 				<div class="selectPhoto">
 					<label for="explore"><i class="fa-regular fa-image"></i></label>
-					<input id="explore" type="file" accept=".png,.jpeg,.jpeg">
+					<input id="explore" type="file" accept=".png,.jpeg,.jpg">
                     <div id="btnAddPhoto">+ Ajouter photo</div>
 					<p>jpg, png : 4mo max</p>
                     <img class="prevNewProject" src="#">

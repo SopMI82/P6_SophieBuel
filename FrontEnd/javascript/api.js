@@ -49,10 +49,10 @@ function sendForm() {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${token}`,
-            'accept': 'application/json',
+            'accept': 'application/json'
         },
         body: projectToAdd,
     })
     console.log(projectToAdd);
-    window.location.reload()
+    //window.location.reload()
 }
